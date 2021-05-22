@@ -16,5 +16,5 @@ sim:/control_unit/operation
 force -freeze sim:/control_unit/IR 00000000111111110000000000000000 0 
 run 50
 
-force -freeze sim:/control_unit/IR 01000000111111110000000000000001 0 
+force -freeze sim:/control_unit/IR 00000001111111110000000000000001 0 
 run 50
