@@ -1,13 +1,13 @@
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
--- use ieee.numeric_std.all;
-USE ieee.STD_LOGIC_ARITH.ALL;
-USE ieee.STD_LOGIC_UNSIGNED.ALL;
+USE ieee.numeric_std.ALL;
+--USE ieee.STD_LOGIC_ARITH.ALL;
+--USE ieee.STD_LOGIC_UNSIGNED.ALL;
 
 ENTITY control_unit IS
     PORT (
-        IR : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         memRead : OUT STD_LOGIC;
         memWrite : OUT STD_LOGIC;
         pcSelector : OUT STD_LOGIC;
@@ -24,40 +24,57 @@ END control_unit;
 ARCHITECTURE controle_unit_default OF control_unit IS
     SIGNAL operation : STD_LOGIC_VECTOR(5 DOWNTO 0);
     -- define contants 
-    CONSTANT NOP : INTEGER = x"0";
-    CONSTANT SETC : INTEGER = x"1";
-    CONSTANT CLRC : INTEGER = x"2";
-    CONSTANT CLR : INTEGER = x"10";
-    CONSTANT _NOT : INTEGER = x"11";
-    CONSTANT INC : INTEGER = x"12";
-    CONSTANT NEG : INTEGER = x"13";
-    CONSTANT DEC : INTEGER = x"14";
-    CONSTANT _OUT : INTEGER = x"15";
-    CONSTANT _IN : INTEGER = x"16";
-    CONSTANT RLC : INTEGER = x"17";
-    CONSTANT RRC : INTEGER = x"18";
-    CONSTANT MOV : INTEGER = x"40";
-    CONSTANT ADD : INTEGER = x"41";
-    CONSTANT SUB : INTEGER = x"42";
-    CONSTANT _AND : INTEGER = x"43";
-    CONSTANT _OR : INTEGER = x"44";
-    CONSTANT IADD : INTEGER = x"65";
-    CONSTANT SHL : INTEGER = x"66";
-    CONSTANT SHR : INTEGER = x"67";
-    CONSTANT LDM : INTEGER = x"68";
-    CONSTANT PUSH : INTEGER = x"80";
-    CONSTANT POP : INTEGER = x"81";
-    CONSTANT LDD : INTEGER = x"b0";
-    CONSTANT STD : INTEGER = x"b1";
-    CONSTANT RET : INTEGER = x"c0";
-    CONSTANT RTI : INTEGER = x"c1";
-    CONSTANT JZ : INTEGER = x"d0";
-    CONSTANT JN : INTEGER = x"d1";
-    CONSTANT JC : INTEGER = x"d2";
-    CONSTANT JMP : INTEGER = x"d3";
-    CONSTANT CALL : INTEGER = x"d4";
+    CONSTANT NOP : INTEGER := 16#0#;
+    CONSTANT SETC : INTEGER := 16#1#;
+    CONSTANT CLRC : INTEGER := 16#2#;
+    CONSTANT CLR : INTEGER := 16#10#;
+    CONSTANT NOTControl : INTEGER := 16#11#;
+    CONSTANT INC : INTEGER := 16#12#;
+    CONSTANT NEG : INTEGER := 16#13#;
+    CONSTANT DEC : INTEGER := 16#14#;
+    CONSTANT OUTControl : INTEGER := 16#15#;
+    CONSTANT INControl : INTEGER := 16#16#;
+    CONSTANT RLC : INTEGER := 16#17#;
+    CONSTANT RRC : INTEGER := 16#18#;
+    CONSTANT MOV : INTEGER := 16#40#;
+    CONSTANT ADD : INTEGER := 16#41#;
+    CONSTANT SUB : INTEGER := 16#42#;
+    CONSTANT ANDC : INTEGER := 16#43#;
+    CONSTANT ORControl : INTEGER := 16#44#;
+    CONSTANT IADD : INTEGER := 16#65#;
+    CONSTANT SHL : INTEGER := 16#66#;
+    CONSTANT SHR : INTEGER := 16#67#;
+    CONSTANT LDM : INTEGER := 16#68#;
+    CONSTANT PUSH : INTEGER := 16#80#;
+    CONSTANT POP : INTEGER := 16#81#;
+    CONSTANT LDD : INTEGER := 16#b0#;
+    CONSTANT STD : INTEGER := 16#b1#;
+    CONSTANT RET : INTEGER := 16#c0#;
+    CONSTANT RTI : INTEGER := 16#c1#;
+    CONSTANT JZ : INTEGER := 16#d0#;
+    CONSTANT JN : INTEGER := 16#d1#;
+    CONSTANT JC : INTEGER := 16#d2#;
+    CONSTANT JMP : INTEGER := 16#d3#;
+    CONSTANT CALL : INTEGER := 16#d4#;
+    --- -------------------------
+    FUNCTION to_string (a : STD_LOGIC_VECTOR) RETURN STRING IS
+        VARIABLE b : STRING (1 TO a'length) := (OTHERS => NUL);
+        VARIABLE stri : INTEGER := 1;
+    BEGIN
+        FOR i IN a'RANGE LOOP
+            b(stri) := STD_LOGIC'image(a((i)))(2);
+            stri := stri + 1;
+        END LOOP;
+        RETURN b;
+    END FUNCTION;
+    ---------------
 BEGIN
     PROCESS (IR)
+        VARIABLE opCode : INTEGER := to_integer(unsigned(IR(31 DOWNTO 24)));
+
     BEGIN
-    END
+        opCode := to_integer(unsigned(IR(31 DOWNTO 24)));
+        REPORT "IR opCode is " & INTEGER'image(opCode);
+        REPORT "IR " & to_string(IR);
+    END PROCESS;
 END controle_unit_default; -- controle_unit_default
