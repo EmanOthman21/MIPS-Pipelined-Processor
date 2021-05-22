@@ -1,5 +1,6 @@
-Library ieee;
+library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all; 
 
 ENTITY alu IS
 Generic ( n : Integer:=32);
@@ -20,8 +21,10 @@ ARCHITECTURE a_alu OF alu IS
 
   -- Define signals
   Signal FADD, FSUB: std_logic_vector(n-1 DOWNTO 0);
-  Signal FINC, FDEC, FINV : std_logic_vector(n-1 DOWNTO 0);
-  Signal NEGB, ONE : std_logic_vector(n-1 DOWNTO 0);
+  Signal FINC, FDEC, FINV: std_logic_vector(n-1 DOWNTO 0);
+  Signal NEGB, ONE: std_logic_vector(n-1 DOWNTO 0);
+  Signal LEFTB, RIGHTB: std_logic_vector(n-1 DOWNTO 0);
+
 
   Signal CADD, CSUB : std_logic;
   Signal CINC, CDEC, CINV, CNEGB : std_logic;
@@ -29,7 +32,7 @@ ARCHITECTURE a_alu OF alu IS
   BEGIN
   -- logic
   FINV <= not B;
-  ONE <= "0000000000000001";
+  ONE <= "00000000000000000000000000000001";
   NegBAdder : addernbit GENERIC MAP (32) port map (FINV, ONE, '0', NEGB, CNEGB);
   -- A + B
   ADDER: addernbit GENERIC MAP (32) PORT MAP(A, B, '0', FADD, CADD);
@@ -39,7 +42,9 @@ ARCHITECTURE a_alu OF alu IS
   INCREMENTOR: addernbit GENERIC MAP (32) PORT MAP(B, (others => '0'), '1', FINC, CINC);
   -- B - 1 = B + (-1)
   DECREMENTOR: addernbit GENERIC MAP (32) PORT MAP(B, (others => '1'), '0', FDEC, CDEC);
-
+  -- Shift left
+  LEFTB <= std_logic_vector(shift_left(unsigned(A), to_integer(unsigned(B))));
+  RIGHTB <= std_logic_vector(shift_right(unsigned(A), to_integer(unsigned(B))));
   -- map outputs
     F <= (others => '0') when selector = "0001"
     -- Not
@@ -55,15 +60,20 @@ ARCHITECTURE a_alu OF alu IS
     -- RRC
     else B(0) & B(n-1 DOWNTO 1) when selector = "0111"
     -- Move
-    else A when selector = "1000"
+    else A when selector = "1000" or selector = "1111"
     -- Add
-    else FADD when selector = "1001" or selector = "1111"
+    else FADD when selector = "1001"
     -- SUB
     else FSUB when selector = "1010"
     -- AND
     else (A and B) when selector = "1011"
     -- OR
-    else (A or B) when selector = "1100";
+    else (A or B) when selector = "1100"
+    -- SHL
+    else LEFTB when selector = "1101"
+    -- SHR
+    else RIGHTB when selector = "1110"
+    else B;
 
 
 
@@ -71,9 +81,9 @@ ARCHITECTURE a_alu OF alu IS
     else CINC when selector = "0011"
     else CNEGB when selector = "0100"
     else CDEC when selector = "0101"
-    else B(n-1) when selector = "0110"
-    else B(0) when selector = "0111"
-    else CADD when selector = "1001" or selector = "1111"
+    else B(n-1) when selector = "0110" or selector = "1101"
+    else B(0) when selector = "0111" or selector = "1110"
+    else CADD when selector = "1001"
     else CSUB when selector = "1010"
     else cin;
 
