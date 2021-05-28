@@ -5,6 +5,7 @@ ENTITY register_file IS
     PORT (
         IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstNewValue : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        RdstWriteBacknum : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         spOperationSelector : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 
         offset : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -29,6 +30,7 @@ ARCHITECTURE register_file_architecture OF register_file IS
     SIGNAL sp : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL tempRdst : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL tempRsrc : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL tempRdstNewValue : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 BEGIN
     -- rdst mux
@@ -39,6 +41,9 @@ BEGIN
 
     -- sp control unit 
     sp_control_unit_lbl : ENTITY work.sp_control_unit PORT MAP(spOperationSelector, sp);
+
+    -- write back to rdst 
+    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
     decding : PROCESS (IR)
     BEGIN
         -- sign extend offset 
