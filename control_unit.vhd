@@ -23,7 +23,8 @@ ENTITY control_unit IS
         aluSelect : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
         clrCFlag : OUT STD_LOGIC;
         setCFlag : OUT STD_LOGIC;
-        immFlag : OUT STD_LOGIC
+        immFlag : OUT STD_LOGIC;
+        loadFlag : OUT STD_LOGIC
     );
 END control_unit;
 
@@ -99,6 +100,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = NOP THEN
             memRead <= '0';
             memWrite <= '0';
@@ -113,6 +115,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = SETC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -127,6 +130,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '0';
             setCFlag <= '1';
+            loadFlag <= '0';
         ELSIF opCode = CLRC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -141,6 +145,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '1';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = CLR THEN
             memRead <= '0';
             memWrite <= '0';
@@ -155,6 +160,7 @@ BEGIN
             aluSelect <= "0001";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = NOTControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -169,6 +175,7 @@ BEGIN
             aluSelect <= "0010";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = INC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -183,6 +190,7 @@ BEGIN
             aluSelect <= "0011";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = NEG THEN
             memRead <= '0';
             memWrite <= '0';
@@ -197,6 +205,7 @@ BEGIN
             aluSelect <= "0100";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = DEC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -211,6 +220,7 @@ BEGIN
             aluSelect <= "0101";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = OUTControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -225,6 +235,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = INControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -239,6 +250,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = RLC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -253,6 +265,7 @@ BEGIN
             aluSelect <= "0110";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = RRC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -267,6 +280,7 @@ BEGIN
             aluSelect <= "0111";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = MOV THEN
             memRead <= '0';
             memWrite <= '0';
@@ -281,6 +295,7 @@ BEGIN
             aluSelect <= "1000";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = ADD THEN
             memRead <= '0';
             memWrite <= '0';
@@ -295,6 +310,7 @@ BEGIN
             aluSelect <= "1001";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = SUB THEN
             memRead <= '0';
             memWrite <= '0';
@@ -309,6 +325,7 @@ BEGIN
             aluSelect <= "1010";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = ANDControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -323,6 +340,7 @@ BEGIN
             aluSelect <= "0111";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = ORControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -337,6 +355,7 @@ BEGIN
             aluSelect <= "1100";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = IADD THEN
             memRead <= '0';
             memWrite <= '0';
@@ -351,6 +370,7 @@ BEGIN
             aluSelect <= "10001";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = SHL THEN
             memRead <= '0';
             memWrite <= '0';
@@ -365,6 +385,7 @@ BEGIN
             aluSelect <= "1101";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = SHR THEN
             memRead <= '0';
             memWrite <= '0';
@@ -379,6 +400,7 @@ BEGIN
             aluSelect <= "1110";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = LDM THEN
             memRead <= '0';
             memWrite <= '0';
@@ -393,6 +415,7 @@ BEGIN
             aluSelect <= "1111";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = PUSH THEN
             memRead <= '0';
             memWrite <= '1';
@@ -407,6 +430,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = POP THEN
             memRead <= '1';
             memWrite <= '0';
@@ -421,6 +445,7 @@ BEGIN
             aluSelect <= "0000";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         ELSIF opCode = LDD THEN
             memRead <= '1';
             memWrite <= '0';
@@ -435,6 +460,7 @@ BEGIN
             aluSelect <= "1001";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '1';
         ELSIF opCode = STD THEN
             memRead <= '0';
             memWrite <= '1';
@@ -449,6 +475,7 @@ BEGIN
             aluSelect <= "1001";
             clrCFlag <= '0';
             setCFlag <= '0';
+            loadFlag <= '0';
         END IF;
 
     END PROCESS;
