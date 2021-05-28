@@ -22,7 +22,8 @@ ENTITY control_unit IS
         inputPort : OUT STD_LOGIC;
         aluSelect : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
         clrCFlag : OUT STD_LOGIC;
-        setCFlag : OUT STD_LOGIC
+        setCFlag : OUT STD_LOGIC;
+        immFlag : OUT STD_LOGIC
     );
 END control_unit;
 
@@ -78,6 +79,7 @@ BEGIN
         VARIABLE opCode : INTEGER := to_integer(unsigned(IR(31 DOWNTO 24)));
 
     BEGIN
+        immFlag <= IR(29);
         opCode := to_integer(unsigned(IR(31 DOWNTO 24)));
         REPORT "IR opCode is " & INTEGER'image(opCode);
         REPORT "IR " & to_string(IR);
