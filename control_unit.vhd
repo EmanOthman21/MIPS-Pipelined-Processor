@@ -10,6 +10,7 @@ ENTITY control_unit IS
         IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         flags : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
         RESET : IN STD_LOGIC;
+
         memRead : OUT STD_LOGIC;
         memWrite : OUT STD_LOGIC;
         pcSelector : OUT STD_LOGIC;
