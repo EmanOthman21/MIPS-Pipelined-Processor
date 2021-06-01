@@ -25,7 +25,8 @@ ENTITY control_unit IS
         clrCFlag : OUT STD_LOGIC;
         setCFlag : OUT STD_LOGIC;
         immFlag : OUT STD_LOGIC;
-        loadFlag : OUT STD_LOGIC
+        loadFlag : OUT STD_LOGIC;
+        rdstWB : OUT STD_LOGIC
     );
 END control_unit;
 
@@ -102,6 +103,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = NOP THEN
             memRead <= '0';
             memWrite <= '0';
@@ -117,6 +119,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = SETC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -132,6 +135,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '1';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = CLRC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -147,6 +151,7 @@ BEGIN
             clrCFlag <= '1';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = CLR THEN
             memRead <= '0';
             memWrite <= '0';
@@ -162,6 +167,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = NOTControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -177,6 +183,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = INC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -192,6 +199,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = NEG THEN
             memRead <= '0';
             memWrite <= '0';
@@ -207,6 +215,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = DEC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -222,6 +231,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = OUTControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -237,6 +247,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = INControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -252,6 +263,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = RLC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -267,6 +279,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = RRC THEN
             memRead <= '0';
             memWrite <= '0';
@@ -282,6 +295,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = MOV THEN
             memRead <= '0';
             memWrite <= '0';
@@ -297,6 +311,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = ADD THEN
             memRead <= '0';
             memWrite <= '0';
@@ -312,6 +327,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = SUB THEN
             memRead <= '0';
             memWrite <= '0';
@@ -327,6 +343,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = ANDControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -342,6 +359,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = ORControl THEN
             memRead <= '0';
             memWrite <= '0';
@@ -357,6 +375,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = IADD THEN
             memRead <= '0';
             memWrite <= '0';
@@ -372,6 +391,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = SHL THEN
             memRead <= '0';
             memWrite <= '0';
@@ -387,6 +407,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = SHR THEN
             memRead <= '0';
             memWrite <= '0';
@@ -402,6 +423,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = LDM THEN
             memRead <= '0';
             memWrite <= '0';
@@ -417,6 +439,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '1';
         ELSIF opCode = PUSH THEN
             memRead <= '0';
             memWrite <= '1';
@@ -432,6 +455,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = POP THEN
             memRead <= '1';
             memWrite <= '0';
@@ -447,6 +471,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         ELSIF opCode = LDD THEN
             memRead <= '1';
             memWrite <= '0';
@@ -462,6 +487,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '1';
+            rdstWB <= '1';
         ELSIF opCode = STD THEN
             memRead <= '0';
             memWrite <= '1';
@@ -477,6 +503,7 @@ BEGIN
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
+            rdstWB <= '0';
         END IF;
 
     END PROCESS;
