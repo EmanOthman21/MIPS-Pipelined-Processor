@@ -36,13 +36,13 @@ END decoding_stage;
 ARCHITECTURE decoding_stage_arch OF decoding_stage IS
     SIGNAL controlSignals : STD_LOGIC_VECTOR(controlSignalsSize - 1 DOWNTO 0);
 BEGIN
-    control_unit_lbl : ENTITY work.control_unit PORT MAP(IR, flags, RESET, controlSignals(controlSignalsSize - 1), controlSignals(controlSignalsSize - 2), controlSignals(controlSignalsSize - 3), controlSignals(controlSignalsSize - 4), controlSignals(controlSignalsSize - 5 DOWNTO controlSignalsSize - 6), controlSignals(controlSignalsSize - 7), controlSignals(controlSignalsSize - 8 DOWNTO controlSignalsSize - 9), controlSignals(controlSignalsSize - 10), controlSignals(controlSignalsSize - 11), controlSignals(controlSignalsSize - 12), controlSignals(controlSignalsSize - 13 DOWNTO controlSignalsSize - 16), controlSignals(controlSignalsSize - 17), controlSignals(controlSignalsSize - 18), controlSignals(controlSignalsSize - 19), controlSignals(controlSignalsSize - 20));
+    control_unit_lbl : ENTITY work.control_unit PORT MAP(IR, flags, RESET, controlSignals(0), controlSignals(1), controlSignals(2), controlSignals(3), controlSignals(5 DOWNTO 4), controlSignals(6), controlSignals(8 DOWNTO 7), controlSignals(9), controlSignals(10), controlSignals(11), controlSignals(15 DOWNTO 12), controlSignals(16), controlSignals(17), controlSignals(18), controlSignals(19), controlSignals(20));
 
-    register_file_lbl : ENTITY work.register_file PORT MAP (IR, RdstNewValue, RdstWriteBackNum, controlSignals(controlSignalsSize - 5 DOWNTO controlSignalsSize - 6), offsetOut, rdstOut, rsrcOut, rdstNumOut, rsrcNumOut);
+    register_file_lbl : ENTITY work.register_file PORT MAP (IR, RdstNewValue, RdstWriteBackNum, controlSignals(5 DOWNTO 4), offsetOut, rdstOut, rsrcOut, rdstNumOut, rsrcNumOut);
 
-    load_use_detection_lbl : ENTITY work.laod_use_detection PORT MAP(IR, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, controlSignals(controlSignalsSize - 21));
+    load_use_detection_lbl : ENTITY work.laod_use_detection PORT MAP(IR, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, controlSignals(21));
 
-    data_hazard_unit_lbl : ENTITY work.DataHazardUnit PORT MAP (IR(29), IR(19 DOWNTO 16), RdestNumMEMWB, RdestNumEXMEM, rdstWBSeclectorMEMWB, rdstWBSeclectorEXMEM, controlSignals(controlSignalsSize - 22 DOWNTO controlSignalsSize - 23), controlSignals(controlSignalsSize - 24 DOWNTO controlSignalsSize - 25));
+    data_hazard_unit_lbl : ENTITY work.DataHazardUnit PORT MAP (IR(29), IR(19 DOWNTO 16), RdestNumMEMWB, RdestNumEXMEM, rdstWBSeclectorMEMWB, rdstWBSeclectorEXMEM, controlSignals(23 DOWNTO 22), controlSignals(25 DOWNTO 24));
 
     controlSignalsOut <= controlSignals;
 END decoding_stage_arch; -- decoding_stage_arch
