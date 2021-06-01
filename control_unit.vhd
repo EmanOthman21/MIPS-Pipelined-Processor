@@ -10,7 +10,10 @@ ENTITY control_unit IS
         IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         flags : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
         RESET : IN STD_LOGIC;
-
+        loadFlagEXMEM : IN STD_LOGIC;
+        loadFlagMEMWB : IN STD_LOGIC;
+        RdestNumEXMEM : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        RdestNumMEMWB : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         memRead : OUT STD_LOGIC;
         memWrite : OUT STD_LOGIC;
         pcSelector : OUT STD_LOGIC;
@@ -26,7 +29,8 @@ ENTITY control_unit IS
         setCFlag : OUT STD_LOGIC;
         immFlag : OUT STD_LOGIC;
         loadFlag : OUT STD_LOGIC;
-        rdstWB : OUT STD_LOGIC
+        rdstWB : OUT STD_LOGIC;
+        loadUse : OUT STD_LOGIC
     );
 END control_unit;
 
@@ -65,27 +69,15 @@ ARCHITECTURE controle_unit_default OF control_unit IS
     CONSTANT JC : INTEGER := 16#d2#;
     CONSTANT JMP : INTEGER := 16#d3#;
     CONSTANT CALL : INTEGER := 16#d4#;
-    --- -------------------------
-    FUNCTION to_string (a : STD_LOGIC_VECTOR) RETURN STRING IS
-        VARIABLE b : STRING (1 TO a'length) := (OTHERS => NUL);
-        VARIABLE stri : INTEGER := 1;
-    BEGIN
-        FOR i IN a'RANGE LOOP
-            b(stri) := STD_LOGIC'image(a((i)))(2);
-            stri := stri + 1;
-        END LOOP;
-        RETURN b;
-    END FUNCTION;
-    ---------------
+
 BEGIN
+    load_use_detection_lbl : ENTITY work.laod_use_detection PORT MAP (IR, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, loadUse);
     PROCESS (IR)
         VARIABLE opCode : INTEGER := to_integer(unsigned(IR(31 DOWNTO 24)));
 
     BEGIN
         immFlag <= IR(29);
         opCode := to_integer(unsigned(IR(31 DOWNTO 24)));
-        REPORT "IR opCode is " & INTEGER'image(opCode);
-        REPORT "IR " & to_string(IR);
 
         -- generate contol signals
         IF RESET = '1' THEN
@@ -387,7 +379,7 @@ BEGIN
             memAddressSelector <= '0';
             outputPort <= '0';
             inputPort <= '0';
-            aluSelect <= "10001";
+            aluSelect <= "1001";
             clrCFlag <= '0';
             setCFlag <= '0';
             loadFlag <= '0';
