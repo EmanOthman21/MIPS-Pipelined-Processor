@@ -42,7 +42,5 @@ BEGIN
 
     load_use_detection_lbl : ENTITY work.laod_use_detection PORT MAP(IR, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, controlSignals(21));
 
-    data_hazard_unit_lbl : ENTITY work.DataHazardUnit PORT MAP (IR(29), IR(19 DOWNTO 16), RdestNumMEMWB, RdestNumEXMEM, rdstWBSeclectorMEMWB, rdstWBSeclectorEXMEM, controlSignals(23 DOWNTO 22), controlSignals(25 DOWNTO 24));
-
     controlSignalsOut <= controlSignals;
 END decoding_stage_arch; -- decoding_stage_arch
