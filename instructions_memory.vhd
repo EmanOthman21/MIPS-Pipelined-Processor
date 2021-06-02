@@ -8,8 +8,9 @@ ENTITY instructions_memory IS
 		addressLineWidth : INTEGER := 16
 	);
 	PORT (
-		clk : IN STD_LOGIC;
+		clk, reset : IN STD_LOGIC;
 		PC : IN STD_LOGIC_VECTOR(dataLineWidth - 1 DOWNTO 0);
+		m0 : OUT STD_LOGIC_VECTOR(dataLineWidth - 1 DOWNTO 0);
 		instruction : OUT STD_LOGIC_VECTOR(dataLineWidth - 1 DOWNTO 0)
 	);
 END instructions_memory;
@@ -21,8 +22,13 @@ BEGIN
 	main : PROCESS (clk)
 	BEGIN
 		IF rising_edge(clk) THEN
-			instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)));
-			instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC)) + 1);
+			IF reset = '1' THEN
+				m0(addressLineWidth - 1 DOWNTO 0) <= rom(0);
+				m0(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(1);
+			ELSE
+				instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)));
+				instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC)) + 1);
+			END IF;
 		END IF;
 	END PROCESS; -- main
 
