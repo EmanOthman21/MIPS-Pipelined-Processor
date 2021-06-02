@@ -7,12 +7,14 @@ Generic ( n : Integer:=32);
   PORT (Rdest,Rsrc : IN std_logic_vector (n-1 downto 0);
   memOut,aluOut : IN std_logic_vector (n-1 downto 0);
   inPort,offset : IN std_logic_vector (n-1 downto 0);
+  flagRegIn: IN std_logic_vector (2 downto 0);
   RdestNumID,RsrcNumID,RdestNumMem,RdestNumEX : IN std_logic_vector (3 downto 0);
 	wbEX,wbMem: IN std_logic;
   control: IN std_logic_vector (20 downto 0);
 	RdestOutEX, aluOutEX, outPort : OUT std_logic_vector (n-1 downto 0);
   RdestNum: OUT std_logic_vector (3 downto 0);
-  controlOut: OUT std_logic_vector (20 downto 0)
+  controlOut: OUT std_logic_vector (20 downto 0);
+  flagOut: OUT std_logic_vector (2 downto 0)
   );
 END execute_stage;
 
@@ -34,21 +36,32 @@ ARCHITECTURE executeArch OF execute_stage is
     selector: OUT std_logic_vector (1 downto 0));
   END COMPONENT;
 
+  COMPONENT flag IS
+    PORT ( cin, changeEnable,setCarry,clrCarry: IN std_logic;
+    inFlag: IN std_logic_vector (2 downto 0);
+    F: IN std_logic_vector(15 downto 0);
+    outFlag: OUT std_logic_vector (2 downto 0));
+  END COMPONENT;
+
+
   ---------------------
   -- Signals
   ---------------------
-  Signal flagReg : std_logic_vector(2 DOWNTO 0);
   Signal writeFlags, writeOut, immediate, readInputPort,aluCout: std_logic;
+  Signal setCarry,clrCarry: std_logic;
   Signal aluSelect : std_logic_vector(3 downto 0);
-  Signal srcIn, forwardedDest, aluIn1, aluIn2: std_logic_vector(n-1 downto 0);
+  Signal srcIn, forwardedDest, aluIn1, aluIn2,aluTemp: std_logic_vector(n-1 downto 0);
   Signal inSel1,inSel2 : std_logic_vector(1 DOWNTO 0);
 
 	BEGIN
-    writeFlags <= control(16);
-    writeOut <= control(9);
-    readInputPort <= control(8);
-    aluSelect <= control(7 downto 4);
-    immediate <= control(1);
+    writeFlags <= control(3);
+    writeOut <= control(10);
+    readInputPort <= control(11);
+    aluSelect <= control(15 downto 12);
+    clrCarry <= control(16);
+    setCarry <= control(17);
+    immediate <= control(18);
+
 
     srcIn <= inPort when readInputPort = '1'
     else Rsrc;
@@ -67,7 +80,11 @@ ARCHITECTURE executeArch OF execute_stage is
     aluIn2 <= offset when immediate = '1'
     else forwardedDest;
 
-    aluComp: alu GENERIC MAP (32) PORT MAP(aluIn1,aluIn2,aluSelect,flagReg(2),aluOutEX,aluCout);
+    aluComp: alu GENERIC MAP (32) PORT MAP(aluIn1,aluIn2,aluSelect,flagRegIn(2),aluTemp,aluCout);
+
+    flagComp: flag PORT MAP(aluCout,writeFlags,setCarry,clrCarry,flagRegIn,aluTemp,flagOut);
+
+    aluOutEx <= aluTemp;
     outPort <= forwardedDest when writeOut = '1';
     RdestOutEX <= forwardedDest;
     controlOut <= control;

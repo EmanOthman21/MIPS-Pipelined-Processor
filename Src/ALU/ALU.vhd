@@ -6,8 +6,9 @@ ENTITY alu IS
 Generic ( n : Integer:=32);
   PORT (A,B : IN std_logic_vector (n-1 downto 0);
   selector : IN std_logic_vector (3 downto 0);
-	cin: IN std_logic;
+	flagReg: IN std_logic_vector (2 downto 0);
 	F: OUT std_logic_vector (n-1 downto 0);
+	flagOut: OUT std_logic_vector (n-1 downto 0);
 	cout : OUT std_logic);
 END alu;
 
@@ -29,8 +30,11 @@ ARCHITECTURE a_alu OF alu IS
   Signal CADD, CSUB : std_logic;
   Signal CINC, CDEC, CINV, CNEGB : std_logic;
 
+  Signal cin : std_logic;
+
   BEGIN
   -- logic
+  cin <= flagReg(2);
   FINV <= not B;
   ONE <= "00000000000000000000000000000001";
   NegBAdder : addernbit GENERIC MAP (32) port map (FINV, ONE, '0', NEGB, CNEGB);
