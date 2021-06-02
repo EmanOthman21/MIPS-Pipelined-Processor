@@ -10,3 +10,4 @@ work
 *stacktrace.txt
 *.wlf
 *.vstf
+.vscode/*

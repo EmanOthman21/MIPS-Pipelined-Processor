@@ -26,6 +26,8 @@ BEGIN
             loadUse <= '1';
         ELSIF loadFlagMEMWB = '1' AND (RdestNumMEMWB = IR(23 DOWNTO 20) OR RdestNumMEMWB = IR(19 DOWNTO 16)) THEN
             loadUse <= '1';
+        ELSE
+            loadUse <= '0';
         END IF;
 
     END PROCESS; -- identifier

@@ -45,16 +45,17 @@ BEGIN
 
     -- write back to rdst 
     rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
-    decding : PROCESS (IR)
+    decding : PROCESS (IR, clk)
     BEGIN
-        -- sign extend offset 
-        offset <= STD_LOGIC_VECTOR(resize(signed(IR(15 DOWNTO 0)), 32));
+        IF falling_edge(clk) THEN
+            -- sign extend offset 
+            offset <= STD_LOGIC_VECTOR(resize(signed(IR(15 DOWNTO 0)), 32));
 
-        RdstNum <= IR(23 DOWNTO 20);
-        RsrcNum <= IR(19 DOWNTO 16);
-        Rdst <= tempRdst;
-        Rsrc <= tempRsrc;
-
+            RdstNum <= IR(23 DOWNTO 20);
+            RsrcNum <= IR(19 DOWNTO 16);
+            Rdst <= tempRdst;
+            Rsrc <= tempRsrc;
+        END IF;
     END PROCESS; -- decding
 
 END register_file_architecture;
