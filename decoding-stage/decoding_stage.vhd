@@ -9,6 +9,7 @@ ENTITY decoding_stage IS
 
     );
     PORT (
+        clk : IN STD_LOGIC;
         pc : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstNewValue : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -36,7 +37,7 @@ ARCHITECTURE decoding_stage_arch OF decoding_stage IS
 BEGIN
     control_unit_lbl : ENTITY work.control_unit PORT MAP(IR, flags, RESET, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, controlSignals(0), controlSignals(1), controlSignals(2), controlSignals(3), controlSignals(5 DOWNTO 4), controlSignals(6), controlSignals(8 DOWNTO 7), controlSignals(9), controlSignals(10), controlSignals(11), controlSignals(15 DOWNTO 12), controlSignals(16), controlSignals(17), controlSignals(18), controlSignals(19), controlSignals(20), controlSignals(21));
 
-    register_file_lbl : ENTITY work.register_file PORT MAP (IR, RdstNewValue, RdstWriteBackNum, controlSignals(5 DOWNTO 4), offsetOut, rdstOut, rsrcOut, rdstNumOut, rsrcNumOut);
+    register_file_lbl : ENTITY work.register_file PORT MAP (clk, IR, RdstNewValue, RdstWriteBackNum, controlSignals(5 DOWNTO 4), offsetOut, rdstOut, rsrcOut, rdstNumOut, rsrcNumOut);
 
     controlSignalsOut <= controlSignals;
 END decoding_stage_arch; -- decoding_stage_arch

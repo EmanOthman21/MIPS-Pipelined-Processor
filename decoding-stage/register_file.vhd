@@ -3,6 +3,7 @@ USE ieee.numeric_std.ALL;
 USE ieee.std_logic_1164.ALL;
 ENTITY register_file IS
     PORT (
+        clk : IN STD_LOGIC;
         IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstNewValue : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstWriteBacknum : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -35,15 +36,15 @@ ARCHITECTURE register_file_architecture OF register_file IS
 BEGIN
     -- rdst mux
     rdst_mux_lbl :
-    ENTITY work.mux_4x16 PORT MAP (IR(23 DOWNTO 20), R0, R1, R2, R3, r4, R5, R6, R7, pc, sp, tempRdst);
+    ENTITY work.mux_4x16 PORT MAP (clk, IR(23 DOWNTO 20), R0, R1, R2, R3, r4, R5, R6, R7, pc, sp, tempRdst);
     -- rsrc mux
-    rsrc_mux_lbl : ENTITY work.mux_4x16 PORT MAP (IR(19 DOWNTO 16), R0, R1, R2, R3, r4, R5, R6, R7, pc, sp, tempRsrc);
+    rsrc_mux_lbl : ENTITY work.mux_4x16 PORT MAP (clk, IR(19 DOWNTO 16), R0, R1, R2, R3, r4, R5, R6, R7, pc, sp, tempRsrc);
 
     -- sp control unit 
-    sp_control_unit_lbl : ENTITY work.sp_control_unit PORT MAP(spOperationSelector, sp);
+    sp_control_unit_lbl : ENTITY work.sp_control_unit PORT MAP(clk, spOperationSelector, sp);
 
     -- write back to rdst 
-    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
+    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
     decding : PROCESS (IR)
     BEGIN
         -- sign extend offset 
