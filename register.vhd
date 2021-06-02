@@ -1,0 +1,20 @@
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+ENTITY Reg IS
+	PORT (
+		clk : IN STD_LOGIC;
+		d : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+		q : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+END Reg;
+
+ARCHITECTURE a_Reg OF Reg IS
+	SIGNAL data : STD_LOGIC_VECTOR(31 DOWNTO 0);
+BEGIN
+	PROCESS (clk)
+	BEGIN
+		IF rising_edge(clk) THEN
+			q <= d;
+		END IF;
+	END PROCESS;
+	-- q <= data;
+END a_Reg;

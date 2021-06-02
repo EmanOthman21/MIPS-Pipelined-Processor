@@ -23,11 +23,11 @@ BEGIN
 	BEGIN
 		IF rising_edge(clk) THEN
 			IF reset = '1' THEN
-				m0(addressLineWidth - 1 DOWNTO 0) <= rom(0);
-				m0(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(1);
+				m0(addressLineWidth - 1 DOWNTO 0) <= rom(1);
+				m0(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(0);
 			ELSE
-				instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)));
-				instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC)) + 1);
+				instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)) + 1);
+				instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC)));
 			END IF;
 		END IF;
 	END PROCESS; -- main
