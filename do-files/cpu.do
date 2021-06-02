@@ -19,14 +19,21 @@ sim:/cpu/rdstOut \
 sim:/cpu/rsrcOut \
 sim:/cpu/offsetOut \
 sim:/cpu/inputportOut \
-sim:/cpu/rdstNumOut
+sim:/cpu/rdstNumOut \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R0 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R1 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R2 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R3 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R4 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R5 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R6 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R7 \
+sim:/cpu/EXIn \
+sim:/cpu/EXOut 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
-mem load -filltype value -filldata 16'd1 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(0)
+mem load -filltype value -filldata 16'b0000000100000000 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(0)
 mem load -filltype value -filldata 16'd2 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(1)
-mem load -filltype value -filldata 16'd3 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(2)
-mem load -filltype value -filldata 16'd4 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(3)
-mem load -filltype value -filldata 16'd5 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(4)
-mem load -filltype value -filldata 16'd6 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(5)
+
 property wave -radix hexa *
 
 force -freeze sim:/cpu/reset 1'b0 0

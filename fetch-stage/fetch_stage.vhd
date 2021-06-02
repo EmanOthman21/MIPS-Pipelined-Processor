@@ -23,7 +23,7 @@ ARCHITECTURE fetch_stage OF fetch IS
 
 	SIGNAL pcAdder : STD_LOGIC_VECTOR(31 DOWNTO 0);
 BEGIN
-	pc_register : ENTITY work.reg PORT MAP (clk, pcDin, pcDout);
+	pc_register : ENTITY work.register_simple PORT MAP (clk, pcDin, pcDout);
 
 	pc_mux : ENTITY work.mux_2_1 PORT MAP (reset, pcAdder, m0, pc_mux_out);
 
