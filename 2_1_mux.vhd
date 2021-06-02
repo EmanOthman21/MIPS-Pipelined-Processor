@@ -14,6 +14,5 @@ END mux_2_1;
 ARCHITECTURE mux_logic OF mux_2_1 IS
 BEGIN
 	muxOut <= muxIn2 WHEN selector = '1' ELSE
-		muxIn1 WHEN selector = '0' ELSE
-		(OTHERS => '0');
+		muxIn1 WHEN selector = '0';
 END mux_logic;

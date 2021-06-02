@@ -34,7 +34,7 @@ BEGIN
 	mainLogic : PROCESS (clk, reset, loadUse)
 		VARIABLE firstTime : INTEGER := 0;
 	BEGIN
-		IF falling_edge(clk) THEN
+		IF rising_edge(clk) THEN
 			IF irTemp(29) = '1' THEN
 				pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(pcDout)) + 2, 32));
 			ELSE

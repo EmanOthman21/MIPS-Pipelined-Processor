@@ -10,11 +10,8 @@ END Reg;
 ARCHITECTURE a_Reg OF Reg IS
 	SIGNAL data : STD_LOGIC_VECTOR(31 DOWNTO 0);
 BEGIN
-	PROCESS (clk)
-	BEGIN
-		IF rising_edge(clk) THEN
-			q <= d;
-		END IF;
-	END PROCESS;
+
+	q <= d;
+
 	-- q <= data;
 END a_Reg;

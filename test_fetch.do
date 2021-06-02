@@ -1,12 +1,9 @@
 vsim -gui work.fetch
-add wave -position insertpoint  \
-sim:/fetch/pc
+
 add wave -position insertpoint  \
 sim:/fetch/pcDin
 add wave -position insertpoint  \
 sim:/fetch/pcDout
-add wave -position insertpoint  \
-sim:/fetch/firstTime
 add wave -position insertpoint  \
 sim:/fetch/stall_pc_mux_out
 add wave -position insertpoint  \
@@ -33,6 +30,6 @@ mem load -filltype value -filldata 16'd6 -fillradix unsigned /fetch/mainMemory/r
 property wave -radix unsigned *
 
 
-force -freeze sim:/fetch/reset 1'b1 0
+force -freeze sim:/fetch/reset 1'b0 0
 force -freeze sim:/fetch/loadUse 1'b0 0
 run 500
