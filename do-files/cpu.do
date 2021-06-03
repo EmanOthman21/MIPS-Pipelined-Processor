@@ -4,10 +4,8 @@ sim:/cpu/clk \
 sim:/cpu/RESET \
 sim:/cpu/inPort \
 sim:/cpu/outPort \
-sim:/cpu/PCIFIDOut \
-sim:/cpu/IRIFIDOut \
+sim:/cpu/PCIFIDIn \
 sim:/cpu/IRIFIDIn \
-sim:/cpu/fetch_stage_lbl/stall_pc_mux_out \
 sim:/cpu/RdestOutEXBuffOut \
 sim:/cpu/aluOutEXBuffOut \
 sim:/cpu/RdestNumBuffOut \

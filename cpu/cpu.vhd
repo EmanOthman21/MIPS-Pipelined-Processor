@@ -81,7 +81,7 @@ BEGIN
     ENTITY work.fetch PORT MAP(RESET, controlSignalsOutIDEXIn(21), PCIFIDOut, PCIFIDIn, IRIFIDIn);
 
     fetch_stage_registerr_lbl_1 :
-    ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', PCIFIDIn, PCIFIDOut);
+    ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, '0', '1', PCIFIDIn, PCIFIDOut);
     fetch_stage_registerr_lbl_2 :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', IRIFIDIn, IRIFIDOut);
     -- decode 
