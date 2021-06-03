@@ -30,9 +30,7 @@ BEGIN
 
 	pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 2, 32)) WHEN irTemp(29) = '1' AND RESET = '0'
 		ELSE
-		STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 1, 32)) WHEN RESET = '0'
-		ELSE
-		(OTHERS => '0') WHEN RESET = '1';
+		STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 1, 32)) WHEN RESET = '0';
 
 	IR <= irTemp;
 

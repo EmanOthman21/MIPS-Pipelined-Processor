@@ -13,7 +13,8 @@ ENTITY register_file IS
         Rdst : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         Rsrc : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstNum : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-        RsrcNum : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+        RsrcNum : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+        spOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
     );
 END register_file;
 
@@ -51,5 +52,6 @@ BEGIN
     RdstNum <= IR(23 DOWNTO 20);
     RsrcNum <= IR(19 DOWNTO 16);
     Rdst <= tempRdst;
+    spOut <= sp;
     Rsrc <= tempRsrc;
 END register_file_architecture;
