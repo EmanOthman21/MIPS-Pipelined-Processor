@@ -15,25 +15,17 @@ END mux_4x16;
 ARCHITECTURE mux_4x16_arch OF mux_4x16 IS
 
 BEGIN
-    PROCESS (clk, selector, in0, in1, in2, in3, in4, in5, in6, in7, in8, in9)
-    BEGIN
-        IF rising_edge(clk) THEN
-            CASE(selector) IS
 
-                WHEN "0000" => outData <= in0;
-                WHEN "0001" => outData <= in1;
-                WHEN "0010" => outData <= in2;
-                WHEN "0011" => outData <= in3;
-                WHEN "0100" => outData <= in4;
-                WHEN "0101" => outData <= in5;
-                WHEN "0110" => outData <= in6;
-                WHEN "0111" => outData <= in7;
-                WHEN "1000" => outData <= in8;
-                WHEN "1001" => outData <= in9;
-                WHEN OTHERS => outData <= in0;
-            END CASE;
-        END IF;
-
-    END PROCESS;
+    outData <= in0 WHEN (selector = "0000") ELSE
+        in1 WHEN (selector = "0001") ELSE
+        in2 WHEN (selector = "0010") ELSE
+        in3 WHEN (selector = "0011") ELSE
+        in4 WHEN (selector = "0100") ELSE
+        in5 WHEN (selector = "0101") ELSE
+        in6 WHEN (selector = "0110") ELSE
+        in7 WHEN (selector = "0111") ELSE
+        in8 WHEN (selector = "1000") ELSE
+        in9 WHEN (selector = "1001") ELSE
+        in0;
 
 END mux_4x16_arch; -- mux_4x16_arch

@@ -12,17 +12,9 @@ END sp_control_unit;
 ARCHITECTURE sp_control_unit_arch OF sp_control_unit IS
 
 BEGIN
-    PROCESS (spOperationSelect)
-    BEGIN
-        IF rising_edge(clk) THEN
-            CASE(spOperationSelect) IS
+    sp <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(sp)) + 2, 32)) WHEN (spOperationSelect = "01") ELSE
+        STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(sp)) - 2, 32)) WHEN (spOperationSelect = "10")
+        ELSE
+        sp;
 
-                WHEN "01" => sp <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(sp)) + 2, 32));
-                WHEN "10" => sp <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(sp)) - 2, 32));
-                WHEN OTHERS => sp <= sp;
-
-            END CASE;
-        END IF;
-
-    END PROCESS; -- identifier
 END sp_control_unit_arch; -- sp_control_unit_arch

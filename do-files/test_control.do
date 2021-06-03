@@ -11,7 +11,7 @@ sim:/control_unit/rdstWBSeclector \
 sim:/control_unit/memAddressSelector \
 sim:/control_unit/outputPort \
 sim:/control_unit/inputPort \
-sim:/control_unit/operation
+sim:/control_unit/opCode
 
 force -freeze sim:/control_unit/IR 00000000111111110000000000000000 0 
 run 50
