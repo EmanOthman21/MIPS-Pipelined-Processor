@@ -4,11 +4,12 @@ sim:/cpu/clk \
 sim:/cpu/RESET \
 sim:/cpu/inPort \
 sim:/cpu/outPort \
-sim:/cpu/PCFetch \
+sim:/cpu/PCIFIDOut \
+sim:/cpu/IRIFIDOut \
+sim:/cpu/IRIFIDIn \
+sim:/cpu/fetch_stage_lbl/stall_pc_mux_out \
 sim:/cpu/PCDecode \
 sim:/cpu/IR \
-sim:/cpu/fetch_stage_lbl/pcDout \
-sim:/cpu/fetch_stage_lbl/pcDin \
 sim:/cpu/controlSignals \
 sim:/cpu/flags \
 sim:/cpu/RdstNewValue \

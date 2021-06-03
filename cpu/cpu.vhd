@@ -11,9 +11,14 @@ ENTITY CPU IS
 END CPU;
 
 ARCHITECTURE CPU_arch OF CPU IS
-    -- decode /fetch
+    -- decode 
     SIGNAL PCFetch : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL PCDecode : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    -- IF/ID
+    SIGNAL PcIFIDIn, PCIFIDOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL IRIFIDIn, IRIFIDOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+    -- decode
     SIGNAL IR : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL controlSignals : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL flags : STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -53,9 +58,15 @@ ARCHITECTURE CPU_arch OF CPU IS
     SIGNAL controlOutBuffOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 BEGIN
+    --- fetch 
     fetch_stage_lbl :
-    ENTITY work.fetch PORT MAP(clk, reset, controlSignals(21), PCFetch, IR);
+    ENTITY work.fetch PORT MAP(reset, controlSignals(21), PCIFIDOut, PCIFIDIn, IRIFIDIn);
 
+    fetch_stage_registerr_lbl_1 :
+    ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', PCIFIDIn, PCIFIDOut);
+    fetch_stage_registerr_lbl_2 :
+    ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', IRIFIDIn, IRIFIDOut);
+    -- decode 
     decode_stage_lbl : ENTITY work.decoding_stage GENERIC MAP (32) PORT MAP(clk, PCFetch, IR, RdstNewValue, RdstWriteBackNum, inPort, flags, RESET, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, PCDecode, rdstOut, rsrcOut, offsetOut, inputportOut, rdstNumOut, rsrcNumOut, controlSignals);
 
     exec_stage_lbl : ENTITY work.execute_stage GENERIC MAP(32, 32) PORT MAP(clk, RESET, rdstOut, rsrcOut, memOut, aluOut, inputportOut, offsetOut, flags, rdstNumOut, rsrcNumOut, RdestNumMEMWB, RdestNumBuffOut, controlOutBuffOut(20), loadFlagMEMWB, controlSignals, RdestOutEXBuffIn, aluOutEXBuffIn, outPort, RdestNumBuffIn, flagOutBuffIn, controlOutBuffIn);

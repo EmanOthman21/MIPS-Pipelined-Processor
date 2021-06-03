@@ -35,8 +35,11 @@ ARCHITECTURE arch OF instructions_memory IS
 BEGIN
 	m0(addressLineWidth - 1 DOWNTO 0) <= rom(0) WHEN reset = '1';
 	m0(dataLineWidth - 1 DOWNTO addressLineWidth) <= (OTHERS => '0') WHEN reset = '1';
-	instruction <= (OTHERS => '0') WHEN reset = '1';
+	--instruction <= (OTHERS => '0') WHEN reset = '1';
 
-	instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)) + 1);
-	instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC)));
+	instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)) + 1) WHEN (reset = '0') ELSE
+	(OTHERS => '0');
+	instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC))) WHEN (reset = '0') ELSE
+	(OTHERS => '0');
+
 END arch;

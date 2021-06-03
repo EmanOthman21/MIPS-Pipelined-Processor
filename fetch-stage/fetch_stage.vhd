@@ -26,7 +26,7 @@ BEGIN
 
 	stall_pc_mux : ENTITY work.mux_2_1 PORT MAP (loadUse, pc_mux_out, stall_pc_mux_out, stall_pc_mux_out);
 
-	mainMemory : ENTITY work.instructions_memory GENERIC MAP (16, 32, 16) PORT MAP (reset, stall_pc_mux_out, m0, irTemp);
+	mainMemory : ENTITY work.instructions_memory GENERIC MAP (65000, 32, 16) PORT MAP (reset, stall_pc_mux_out, m0, irTemp);
 
 	pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 2, 32)) WHEN irTemp(29) = '1' AND RESET = '0'
 		ELSE
