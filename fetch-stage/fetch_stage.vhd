@@ -18,7 +18,7 @@ ARCHITECTURE fetch_stage OF fetch IS
 	SIGNAL m0 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL irTemp : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
-	SIGNAL pcDin : STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL pcDin : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL pcDout : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 	SIGNAL pcAdder : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -35,11 +35,14 @@ BEGIN
 		VARIABLE firstTime : INTEGER := 0;
 	BEGIN
 		IF rising_edge(clk) THEN
-			IF irTemp(29) = '1' THEN
+			IF irTemp(29) = '1' AND RESET = '0' THEN
 				pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(pcDout)) + 2, 32));
-			ELSE
+			ELSIF RESET = '0' THEN
 				pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(pcDout)) + 1, 32));
+			ELSIF RESET = '1' THEN
+				pcAdder <= (OTHERS => '0');
 			END IF;
+
 		END IF;
 
 		-- IF rising_edge(clk) THEN

@@ -30,6 +30,9 @@ mem load -filltype value -filldata 16'd6 -fillradix unsigned /fetch/mainMemory/r
 property wave -radix unsigned *
 
 
+force -freeze sim:/fetch/reset 1'b1 0
+force -freeze sim:/fetch/loadUse 1'b0 0
+run 100
 force -freeze sim:/fetch/reset 1'b0 0
 force -freeze sim:/fetch/loadUse 1'b0 0
-run 500
+run 100

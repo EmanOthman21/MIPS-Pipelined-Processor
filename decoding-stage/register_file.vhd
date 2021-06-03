@@ -3,7 +3,7 @@ USE ieee.numeric_std.ALL;
 USE ieee.std_logic_1164.ALL;
 ENTITY register_file IS
     PORT (
-        clk : IN STD_LOGIC;
+        clk, RESET : IN STD_LOGIC;
         IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstNewValue : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstWriteBacknum : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -44,7 +44,7 @@ BEGIN
     sp_control_unit_lbl : ENTITY work.sp_control_unit PORT MAP(clk, spOperationSelector, sp);
 
     -- write back to rdst 
-    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
+    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RESET, RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
     decding : PROCESS (IR, clk)
     BEGIN
         IF rising_edge(clk) THEN
