@@ -34,7 +34,8 @@ ARCHITECTURE arch OF instructions_memory IS
 BEGIN
 	main : PROCESS (clk, PC)
 	BEGIN
-		IF rising_edge(clk) THEN
+		-- this is very HACKY
+		IF (clk = '1') THEN
 			REPORT "PC  is " & to_string(PC);
 			IF reset = '1' THEN
 				m0(addressLineWidth - 1 DOWNTO 0) <= rom(0);
