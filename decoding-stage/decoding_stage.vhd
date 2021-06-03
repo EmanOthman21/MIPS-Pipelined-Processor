@@ -21,6 +21,7 @@ ENTITY decoding_stage IS
         loadFlagMEMWB : IN STD_LOGIC;
         RdestNumEXMEM : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         RdestNumMEMWB : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+
         pcOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         rdstOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         rsrcOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);

@@ -8,36 +8,14 @@ sim:/cpu/PCIFIDOut \
 sim:/cpu/IRIFIDOut \
 sim:/cpu/IRIFIDIn \
 sim:/cpu/fetch_stage_lbl/stall_pc_mux_out \
-sim:/cpu/PCDecode \
-sim:/cpu/IR \
-sim:/cpu/controlSignals \
-sim:/cpu/flags \
-sim:/cpu/RdstNewValue \
-sim:/cpu/RdstWriteBackNum \
-sim:/cpu/loadFlagEXMEM \
-sim:/cpu/loadFlagMEMWB \
-sim:/cpu/RdestNumEXMEM \
-sim:/cpu/RdestNumMEMWB \
-sim:/cpu/rdstOut \
-sim:/cpu/rsrcOut \
-sim:/cpu/offsetOut \
-sim:/cpu/inputportOut \
-sim:/cpu/rdstNumOut \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R0 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R1 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R2 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R3 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R4 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R5 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R6 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R7 \
-sim:/cpu/EXIn \
-sim:/cpu/EXOut \
 sim:/cpu/RdestOutEXBuffOut \
 sim:/cpu/aluOutEXBuffOut \
 sim:/cpu/RdestNumBuffOut \
 sim:/cpu/flagOutBuffOut \
-sim:/cpu/controlOutBuffOut 
+sim:/cpu/controlOutBuffOut \
+sim:/cpu/controlSignalsOutIDEXIn \
+sim:/cpu/rdstNumOutIDEXIn \
+sim:/cpu/rdstNumOutIDEXOut
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
