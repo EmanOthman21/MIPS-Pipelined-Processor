@@ -47,7 +47,7 @@ BEGIN
     rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
     decding : PROCESS (IR, clk)
     BEGIN
-        IF falling_edge(clk) THEN
+        IF rising_edge(clk) THEN
             -- sign extend offset 
             offset <= STD_LOGIC_VECTOR(resize(signed(IR(15 DOWNTO 0)), 32));
 
