@@ -4,6 +4,7 @@ USE ieee.numeric_std.ALL;
 
 ENTITY instructions_memory IS
 	GENERIC (
+		memorySize : INTEGER := 16;
 		dataLineWidth : INTEGER := 32;
 		addressLineWidth : INTEGER := 16
 	);
@@ -16,7 +17,7 @@ ENTITY instructions_memory IS
 END instructions_memory;
 
 ARCHITECTURE arch OF instructions_memory IS
-	TYPE ram_type IS ARRAY(0 TO 15) OF STD_LOGIC_VECTOR(addressLineWidth - 1 DOWNTO 0);
+	TYPE ram_type IS ARRAY(0 TO memorySize - 1) OF STD_LOGIC_VECTOR(addressLineWidth - 1 DOWNTO 0);
 	SIGNAL rom : ram_type;
 BEGIN
 	main : PROCESS (clk)

@@ -25,14 +25,13 @@ ARCHITECTURE fetch_stage OF fetch IS
 BEGIN
 	pc_register : ENTITY work.reg PORT MAP (clk, pcDin, pcDout);
 
-	pc_mux : ENTITY work.mux_2_1 PORT MAP (reset, pcAdder, m0, pc_mux_out);
+	pc_mux : ENTITY work.mux_2_1 GENERIC MAP (32) PORT MAP (reset, pcAdder, m0, pc_mux_out);
 
-	stall_pc_mux : ENTITY work.mux_2_1 PORT MAP (loadUse, pc_mux_out, pcDout, stall_pc_mux_out);
+	stall_pc_mux : ENTITY work.mux_2_1 GENERIC MAP (32) PORT MAP (loadUse, pc_mux_out, pcDout, stall_pc_mux_out);
 
-	mainMemory : ENTITY work.instructions_memory GENERIC MAP (32, 16) PORT MAP (clk, reset, pcDout, m0, irTemp);
+	mainMemory : ENTITY work.instructions_memory GENERIC MAP (2 ** 20, 32, 16) PORT MAP (clk, reset, pcDout, m0, irTemp);
 
 	mainLogic : PROCESS (clk, reset, loadUse)
-		VARIABLE firstTime : INTEGER := 0;
 	BEGIN
 		IF rising_edge(clk) THEN
 			IF irTemp(29) = '1' THEN
@@ -41,16 +40,6 @@ BEGIN
 				pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(pcDout)) + 1, 32));
 			END IF;
 		END IF;
-
-		-- IF rising_edge(clk) THEN
-		-- 	IF (firstTime = 0) THEN
-		-- 		pc <= (OTHERS => '0');
-		-- 		firstTime := 1;
-		-- 		REPORT "This is a message";
-		-- 	ELSE
-		-- 		pc <= stall_pc_mux_out;
-		-- 	END IF;
-		-- END IF;
 	END PROCESS;
 
 	IR <= irTemp;

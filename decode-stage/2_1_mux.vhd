@@ -3,11 +3,14 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
 ENTITY mux_2_1 IS
+	GENERIC (
+		dataSize : INTEGER := 32
+	);
 	PORT (
 		selector : IN STD_LOGIC;
-		muxIn1 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-		muxIn2 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-		muxOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		muxIn1 : IN STD_LOGIC_VECTOR(dataSize - 1 DOWNTO 0);
+		muxIn2 : IN STD_LOGIC_VECTOR(dataSize - 1 DOWNTO 0);
+		muxOut : OUT STD_LOGIC_VECTOR(dataSize - 1 DOWNTO 0)
 	);
 END mux_2_1;
 
