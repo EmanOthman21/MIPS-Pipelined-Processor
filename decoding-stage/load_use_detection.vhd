@@ -19,16 +19,6 @@ END laod_use_detection;
 ARCHITECTURE load_use_detection_arch OF laod_use_detection IS
 
 BEGIN
-    PROCESS (IR, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB)
-    BEGIN
-        -- one op check only rdst, two op check both ????
-        IF loadFlagEXMEM = '1' AND (RdestNumEXMEM = IR(23 DOWNTO 20) OR RdestNumEXMEM = IR(19 DOWNTO 16)) THEN
-            loadUse <= '1';
-        ELSIF loadFlagMEMWB = '1' AND (RdestNumMEMWB = IR(23 DOWNTO 20) OR RdestNumMEMWB = IR(19 DOWNTO 16)) THEN
-            loadUse <= '1';
-        ELSE
-            loadUse <= '0';
-        END IF;
-
-    END PROCESS; -- identifier
+    loadUse <= '1' WHEN((loadFlagEXMEM = '1' AND (RdestNumEXMEM = IR(23 DOWNTO 20) OR RdestNumEXMEM = IR(19 DOWNTO 16))) OR (loadFlagMEMWB = '1' AND (RdestNumMEMWB = IR(23 DOWNTO 20) OR RdestNumMEMWB = IR(19 DOWNTO 16)))) ELSE
+        '0';
 END load_use_detection_arch; -- load_use_detection_arch
