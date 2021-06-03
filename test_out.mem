@@ -1,0 +1,19 @@
+// memory data file (do not edit the following line - required for mem load use)
+// instance=/memory/dataMemory/ram
+// format=mti addressradix=h dataradix=h version=1.0 wordsperline=1
+0: XXXX
+1: XXXX
+2: 0003
+3: 0004
+4: 0005
+5: 0006
+6: XXXX
+7: XXXX
+8: XXXX
+9: XXXX
+a: XXXX
+b: XXXX
+c: XXXX
+d: XXXX
+e: XXXX
+f: XXXX

@@ -5,11 +5,12 @@ USE ieee.numeric_std.ALL;
 
 ENTITY instructions_memory IS
 	GENERIC (
+		memorySize : INTEGER := 16;
 		dataLineWidth : INTEGER := 32;
 		addressLineWidth : INTEGER := 16
 	);
 	PORT (
-		clk, reset : IN STD_LOGIC;
+		reset : IN STD_LOGIC;
 		PC : IN STD_LOGIC_VECTOR(dataLineWidth - 1 DOWNTO 0);
 		m0 : OUT STD_LOGIC_VECTOR(dataLineWidth - 1 DOWNTO 0);
 		instruction : OUT STD_LOGIC_VECTOR(dataLineWidth - 1 DOWNTO 0)
@@ -17,9 +18,9 @@ ENTITY instructions_memory IS
 END instructions_memory;
 
 ARCHITECTURE arch OF instructions_memory IS
-	TYPE ram_type IS ARRAY(0 TO 65536) OF STD_LOGIC_VECTOR(addressLineWidth - 1 DOWNTO 0);
+	TYPE ram_type IS ARRAY(0 TO memorySize - 1) OF STD_LOGIC_VECTOR(addressLineWidth - 1 DOWNTO 0);
 	SIGNAL rom : ram_type;
-	--- -------------------------
+	----------------------------
 	FUNCTION to_string (a : STD_LOGIC_VECTOR) RETURN STRING IS
 		VARIABLE b : STRING (1 TO a'length) := (OTHERS => NUL);
 		VARIABLE stri : INTEGER := 1;
@@ -32,20 +33,10 @@ ARCHITECTURE arch OF instructions_memory IS
 	END FUNCTION;
 	---------------
 BEGIN
-	main : PROCESS (clk, PC)
-	BEGIN
-		-- this is very HACKY
-		IF (clk = '1') THEN
-			REPORT "PC  is " & to_string(PC);
-			IF reset = '1' THEN
-				m0(addressLineWidth - 1 DOWNTO 0) <= rom(0);
-				m0(dataLineWidth - 1 DOWNTO addressLineWidth) <= (OTHERS => '0');
-				instruction <= (OTHERS => '0');
-			ELSE
-				instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)) + 1);
-				instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC)));
-			END IF;
-		END IF;
-	END PROCESS; -- main
+	m0(addressLineWidth - 1 DOWNTO 0) <= rom(0) WHEN reset = '1';
+	m0(dataLineWidth - 1 DOWNTO addressLineWidth) <= (OTHERS => '0') WHEN reset = '1';
+	instruction <= (OTHERS => '0') WHEN reset = '1';
 
+	instruction(addressLineWidth - 1 DOWNTO 0) <= rom(to_integer(unsigned(PC)) + 1);
+	instruction(dataLineWidth - 1 DOWNTO addressLineWidth) <= rom(to_integer(unsigned(PC)));
 END arch;
