@@ -6,11 +6,14 @@ sim:/cpu/inPort \
 sim:/cpu/outPort \
 sim:/cpu/PCIFIDIn \
 sim:/cpu/IRIFIDIn \
+sim:/cpu/PCIFIDOut \
+sim:/cpu/IRIFIDOut \
 sim:/cpu/RdestOutEXBuffOut \
 sim:/cpu/aluOutEXBuffOut \
 sim:/cpu/RdestNumBuffOut \
 sim:/cpu/flagOutBuffOut \
 sim:/cpu/controlOutBuffOut \
+sim:/cpu/controlSignalsOutIDEXOut \
 sim:/cpu/controlSignalsOutIDEXIn \
 sim:/cpu/rdstNumOutIDEXIn \
 sim:/cpu/rdstNumOutIDEXOut \
@@ -28,7 +31,8 @@ sim:/cpu/RdstNewValue \
 sim:/cpu/rdstNumOutMEMWBOut \
 sim:/cpu/decode_stage_lbl/register_file_lbl/RdstNewValue \
 sim:/cpu/decode_stage_lbl/register_file_lbl/RdstWriteBacknum \
-sim:/cpu/decode_stage_lbl/RdstWriteBackNum
+sim:/cpu/decode_stage_lbl/RdstWriteBackNum \
+sim:/cpu/decode_stage_lbl/control_unit_lbl/opCode
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
@@ -38,7 +42,7 @@ mem load -i /home/bahaa/Downloads/1-op.mem -format binary /cpu/memory_stage_lbl/
 property wave -radix hexa *
 
 force -freeze sim:/cpu/reset 1'b1 0
-run 100
+run 150
 
 force -freeze sim:/cpu/inPort 32'd5 0
 force -freeze sim:/cpu/reset 1'b0 0

@@ -78,7 +78,7 @@ ARCHITECTURE CPU_arch OF CPU IS
 BEGIN
     --- fetch 
     fetch_stage_lbl :
-    ENTITY work.fetch PORT MAP(RESET, controlSignalsOutIDEXIn(21), PCIFIDOut, PCIFIDIn, IRIFIDIn);
+    ENTITY work.fetch PORT MAP(clk, RESET, controlSignalsOutIDEXIn(21), PCIFIDOut, PCIFIDIn, IRIFIDIn);
 
     fetch_stage_registerr_lbl_1 :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, '0', '1', PCIFIDIn, PCIFIDOut);

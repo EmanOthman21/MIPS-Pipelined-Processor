@@ -346,7 +346,7 @@ BEGIN
         "0100" WHEN(opCode = NEG) ELSE
         "0101" WHEN(opCode = DEC) ELSE
         "0000" WHEN(opCode = OUTControl) ELSE
-        "0000" WHEN(opCode = INControl) ELSE
+        "1000" WHEN(opCode = INControl) ELSE
         "0110" WHEN(opCode = RLC) ELSE
         "0111" WHEN(opCode = RRC) ELSE
         "1000" WHEN(opCode = MOV) ELSE
