@@ -50,4 +50,7 @@ run 150
 
 force -freeze sim:/cpu/inPort 32'd5 0
 force -freeze sim:/cpu/reset 1'b0 0
-run 1000
+run 740
+force -freeze sim:/cpu/inPort 32'h10 0
+force -freeze sim:/cpu/reset 1'b0 0
+run 740
