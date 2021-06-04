@@ -6,43 +6,9 @@ sim:/cpu/inPort \
 sim:/cpu/outPort \
 sim:/cpu/IRIFIDOut \
 sim:/cpu/PCIFIDOut \
-sim:/cpu/inputportOutIDEXOut \
-sim:/cpu/exec_stage_lbl/aluOut \
-sim:/cpu/exec_stage_lbl/memOut \
-sim:/cpu/exec_stage_lbl/Rdest \
-sim:/cpu/exec_stage_lbl/control \
-sim:/cpu/exec_stage_lbl/inSel2 \
-sim:/cpu/exec_stage_lbl/aluComp/A \
-sim:/cpu/exec_stage_lbl/aluComp/B \
-sim:/cpu/exec_stage_lbl/RdestNumID \
-sim:/cpu/RdestOutEXBuffIn \
-sim:/cpu/aluOutEXBuffIn \
-sim:/cpu/RdestNumBuffIn \
-sim:/cpu/exec_stage_lbl/flags \
-sim:/cpu/controlOutBuffIn \
-sim:/cpu/controlSignalsOutIDEXOut \
-sim:/cpu/controlSignalsOutIDEXIn \
-sim:/cpu/rdstNumOutIDEXIn \
-sim:/cpu/rdstNumOutIDEXOut \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R0 \
+sim:/cpu/flagOutBuffOut \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R1 \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R2 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R3 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R4 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R5 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R6 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R7 \
-sim:/cpu/fetch_stage_lbl/stall_pc_mux_out \
-sim:/cpu/fetch_stage_lbl/pcIn \
-sim:/cpu/RdstNewValue \
-sim:/cpu/rdstNumOutMEMWBOut \
-sim:/cpu/aluOutMEMWBOut \
-sim:/cpu/memOutMEMWBOut \
-sim:/cpu/inputportOutIDEXOut \
-sim:/cpu/decode_stage_lbl/register_file_lbl/RdstNewValue \
-sim:/cpu/decode_stage_lbl/register_file_lbl/RdstWriteBacknum \
-sim:/cpu/decode_stage_lbl/RdstWriteBackNum \
-sim:/cpu/decode_stage_lbl/control_unit_lbl/opCode
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 

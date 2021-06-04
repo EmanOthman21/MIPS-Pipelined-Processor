@@ -15,6 +15,8 @@ ENTITY execute_stage IS
     RdestNumID, RsrcNumID, RdestNumMem, RdestNumEX : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
     wbEX, wbMem : IN STD_LOGIC;
     control : IN STD_LOGIC_VECTOR (controlSignalSize - 1 DOWNTO 0);
+    flagIn: IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+    flagOut: Out STD_LOGIC_VECTOR (2 DOWNTO 0);
     RdestOutEX, aluOutEX, outPort : OUT STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
     RdestNum : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
     controlOut : OUT STD_LOGIC_VECTOR (controlSignalSize - 1 DOWNTO 0)
@@ -43,7 +45,7 @@ ARCHITECTURE executeArch OF execute_stage IS
 
   COMPONENT flag IS
     PORT (
-      reset, cin, changeEnable, setCarry, clrCarry : IN STD_LOGIC;
+      clk,reset, cin, changeEnable, setCarry, clrCarry : IN STD_LOGIC;
       inFlag : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
       F : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
       outFlag : OUT STD_LOGIC_VECTOR (2 DOWNTO 0));
@@ -56,7 +58,6 @@ ARCHITECTURE executeArch OF execute_stage IS
   SIGNAL aluSelect : STD_LOGIC_VECTOR(3 DOWNTO 0);
   SIGNAL srcIn, forwardedDest, aluIn1, aluIn2, aluTemp : STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
   SIGNAL inSel1, inSel2 : STD_LOGIC_VECTOR(1 DOWNTO 0);
-  SIGNAL flags : STD_LOGIC_VECTOR (2 DOWNTO 0);
 
 BEGIN
   writeFlags <= control(3);
@@ -89,9 +90,9 @@ BEGIN
     ELSE
     forwardedDest;
 
-  aluComp : alu GENERIC MAP(32) PORT MAP(aluIn1, aluIn2, aluSelect, flags(2), aluTemp, aluCout);
+  aluComp : alu GENERIC MAP(32) PORT MAP(aluIn1, aluIn2, aluSelect, flagIn(2), aluTemp, aluCout);
 
-  flagComp : flag PORT MAP(RESET, aluCout, writeFlags, setCarry, clrCarry, flags, aluTemp, flags);
+  flagComp : flag PORT MAP(clk,RESET, aluCout, writeFlags, setCarry, clrCarry, flagIn, aluTemp, flagOut);
 
   aluOutEx <= aluTemp;
   outPort <= forwardedDest WHEN writeOut = '1';

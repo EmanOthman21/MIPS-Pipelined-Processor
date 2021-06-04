@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 USE IEEE.numeric_std.all;
 
 ENTITY flag IS
-  PORT (reset, cin, changeEnable,setCarry,clrCarry: IN std_logic;
+  PORT (clk,reset, cin, changeEnable,setCarry,clrCarry: IN std_logic;
   inFlag: IN std_logic_vector (2 downto 0);
   F: IN std_logic_vector(31 downto 0);
 	outFlag: OUT std_logic_vector (2 downto 0));
