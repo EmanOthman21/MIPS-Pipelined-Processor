@@ -28,9 +28,9 @@ BEGIN
 
 	mainMemory : ENTITY work.instructions_memory GENERIC MAP (65000, 32, 16) PORT MAP (reset, stall_pc_mux_out, m0, irTemp);
 
-	pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 2, 32)) WHEN (irTemp(29) = '1' AND RESET = '0' AND clk'event AND clk = '1')
+	pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 2, 32)) WHEN (irTemp(29) = '1' AND RESET = '0' AND clk'event AND clk = '0')
 		ELSE
-		STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 1, 32)) WHEN(irTemp(29) = '0' AND RESET = '0' AND clk'event AND clk = '1')
+		STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 1, 32)) WHEN(irTemp(29) = '0' AND RESET = '0' AND clk'event AND clk = '0')
 		ELSE
 		m0 WHEN RESET = '1';
 
