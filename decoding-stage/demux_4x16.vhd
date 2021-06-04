@@ -15,25 +15,25 @@ END demux_4x16;
 ARCHITECTURE demux_4x16_arch OF demux_4x16 IS
 
 BEGIN
-    out0 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out0 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0000");
-    out1 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out1 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0001");
-    out2 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out2 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0010");
-    out3 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out3 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0011");
-    out4 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out4 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0100");
-    out5 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out5 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0101");
-    out6 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out6 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0110");
-    out7 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out7 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "0111");
-    out8 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out8 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "1000");
-    out9 <= (OTHERS => '0') WHEN (RESET = '0') ELSE
+    out9 <= (OTHERS => '0') WHEN (RESET = '1') ELSE
         inData WHEN (selector = "1001");
 
 END demux_4x16_arch; -- mux_4x16_arch

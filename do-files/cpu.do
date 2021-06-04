@@ -21,7 +21,14 @@ sim:/cpu/decode_stage_lbl/register_file_lbl/R3 \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R4 \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R5 \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R6 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R7 
+sim:/cpu/decode_stage_lbl/register_file_lbl/R7 \
+sim:/cpu/fetch_stage_lbl/stall_pc_mux_out \
+sim:/cpu/fetch_stage_lbl/pcIn \
+sim:/cpu/RdstNewValue \
+sim:/cpu/rdstNumOutMEMWBOut \
+sim:/cpu/decode_stage_lbl/register_file_lbl/RdstNewValue \
+sim:/cpu/decode_stage_lbl/register_file_lbl/RdstWriteBacknum \
+sim:/cpu/decode_stage_lbl/RdstWriteBackNum
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
@@ -35,4 +42,4 @@ run 100
 
 force -freeze sim:/cpu/inPort 32'd5 0
 force -freeze sim:/cpu/reset 1'b0 0
-run 1000
+run 10000
