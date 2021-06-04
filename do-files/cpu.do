@@ -4,7 +4,8 @@ sim:/cpu/clk \
 sim:/cpu/RESET \
 sim:/cpu/inPort \
 sim:/cpu/outPort \
-sim:/cpu/PCIFIDIn \
+sim:/cpu/PCIFIDOut \
+sim:/cpu/IRIFIDOut \
 sim:/cpu/IRIFIDIn \
 sim:/cpu/PCIFIDOut \
 sim:/cpu/IRIFIDOut \
@@ -46,4 +47,4 @@ run 150
 
 force -freeze sim:/cpu/inPort 32'd5 0
 force -freeze sim:/cpu/reset 1'b0 0
-run 10000
+run 1000
