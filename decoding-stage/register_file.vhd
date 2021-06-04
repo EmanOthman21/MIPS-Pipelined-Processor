@@ -8,7 +8,7 @@ ENTITY register_file IS
         RdstNewValue : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstWriteBacknum : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         spOperationSelector : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-
+        rdstWB: in std_logic;
         offset : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         Rdst : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         Rsrc : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -45,7 +45,7 @@ BEGIN
     sp_control_unit_lbl : ENTITY work.sp_control_unit PORT MAP(clk, spOperationSelector, sp);
 
     -- write back to rdst 
-    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RESET, RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
+    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RESET, rdstWB,RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
 
     offset <= STD_LOGIC_VECTOR(resize(signed(IR(15 DOWNTO 0)), 32));
 
