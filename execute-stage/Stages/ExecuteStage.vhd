@@ -14,7 +14,7 @@ ENTITY execute_stage IS
     inPort, offset : IN STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
     flagRegIn : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
     RdestNumID, RsrcNumID, RdestNumMem, RdestNumEX : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-    wbEX, wbMem : IN STD_LOGIC;
+    wbEX, wbMem : IN std_logic;
     control : IN STD_LOGIC_VECTOR (controlSignalSize - 1 DOWNTO 0);
     RdestOutEX, aluOutEX, outPort : OUT STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
     RdestNum : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
@@ -39,7 +39,7 @@ ARCHITECTURE executeArch OF execute_stage IS
   COMPONENT forwarding IS
     PORT (
       srcNumID, destNumEX, destNumMem : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-      wbEX, wbMem : IN STD_LOGIC;
+      wbEX, wbMem : IN std_logic;
       selector : OUT STD_LOGIC_VECTOR (1 DOWNTO 0));
   END COMPONENT;
 
