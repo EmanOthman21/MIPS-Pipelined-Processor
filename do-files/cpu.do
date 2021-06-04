@@ -15,20 +15,26 @@ sim:/cpu/flagOutBuffOut \
 sim:/cpu/controlOutBuffOut \
 sim:/cpu/controlSignalsOutIDEXIn \
 sim:/cpu/rdstNumOutIDEXIn \
-sim:/cpu/rdstNumOutIDEXOut
+sim:/cpu/rdstNumOutIDEXOut \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R0 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R1 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R2 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R3 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R4 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R5 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R6 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R7 
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
 
-mem load -filltype value -filldata 16'b0 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(0)
-mem load -filltype value -filldata 16'b0100000000100001 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(1)
-
-
-mem load -filltype value -filldata 16'b0001010100110000 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(2)
-mem load -filltype value -filldata 16'b0001001001000000 -fillradix unsigned /cpu/fetch_stage_lbl/mainMemory/rom(3)
+mem load -i /home/bahaa/Downloads/1-op.mem -format binary /cpu/fetch_stage_lbl/mainMemory/rom
+mem load -i /home/bahaa/Downloads/1-op.mem -format binary /cpu/memory_stage_lbl/dataMemory/ram
 property wave -radix hexa *
 
 force -freeze sim:/cpu/reset 1'b1 0
 run 100
+
+force -freeze sim:/cpu/inPort 32'd5 0
 force -freeze sim:/cpu/reset 1'b0 0
 run 1000

@@ -38,6 +38,7 @@ ARCHITECTURE CPU_arch OF CPU IS
     SIGNAL PCIDEXIn, PCIDEXOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL rdstOutIDEXIn, rdstOutIDEXOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL rsrcOutIDEXIn, rsrcOutIDEXOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL spOutIDEXIn, spOutIDEXOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL offsetOutIDEXIn, offsetOutIDEXOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL inputportOutIDEXIn, inputportOutIDEXOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL rdstNumOutIDEXIn, rdstNumOutIDEXOut : STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -66,7 +67,11 @@ ARCHITECTURE CPU_arch OF CPU IS
     SIGNAL RdestNumBuffOut : STD_LOGIC_VECTOR(3 DOWNTO 0);
     SIGNAL flagOutBuffOut : STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL controlOutBuffOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
-
+    -- memory 
+    SIGNAL memOutMEMWBIn, memOutMEMWBOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL aluOutMEMWBIn, aluOutMEMWBOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL rdstNumOutMEMWBIn, rdstNumOutMEMWBOut : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL controlSignalsOutMEMWBIn, controlSignalsOutMEMWBOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
     -- wb 
     SIGNAL controlOutMEMWB : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
@@ -76,11 +81,11 @@ BEGIN
     ENTITY work.fetch PORT MAP(RESET, controlSignalsOutIDEXIn(21), PCIFIDOut, PCIFIDIn, IRIFIDIn);
 
     fetch_stage_registerr_lbl_1 :
-    ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', PCIFIDIn, PCIFIDOut);
+    ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, '0', '1', PCIFIDIn, PCIFIDOut);
     fetch_stage_registerr_lbl_2 :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', IRIFIDIn, IRIFIDOut);
     -- decode 
-    decode_stage_lbl : ENTITY work.decoding_stage GENERIC MAP (32) PORT MAP(clk, PCIFIDOut, IRIFIDOut, RdstNewValue, RdstWriteBackNum, inPort, flags, RESET, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, PCIDEXIn, rdstOutIDEXIn, rsrcOutIDEXIn, offsetOutIDEXIn, inputportOutIDEXIn, rdstNumOutIDEXIn, rsrcNumOutIDEXIn, controlSignalsOutIDEXIn);
+    decode_stage_lbl : ENTITY work.decoding_stage GENERIC MAP (32) PORT MAP(clk, PCIFIDOut, IRIFIDOut, RdstNewValue, rdstNumOutMEMWBOut, inPort, flags, RESET, controlOutBuffOut(19), controlSignalsOutMEMWBOut(19), RdestNumBuffOut, rdstNumOutMEMWBOut, controlSignalsOutMEMWBOut(5 DOWNTO 4), PCIDEXIn, rdstOutIDEXIn, rsrcOutIDEXIn, offsetOutIDEXIn, inputportOutIDEXIn, spOutIDEXIn, rdstNumOutIDEXIn, rsrcNumOutIDEXIn, controlSignalsOutIDEXIn);
 
     decode_stage_reg_lbl_1 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', PCIDEXIn, PCIDEXOut);
     decode_stage_reg_lbl_2 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', rdstOutIDEXIn, rdstOutIDEXOut);
@@ -90,12 +95,9 @@ BEGIN
     decode_stage_reg_lbl_6 : ENTITY work.Reg GENERIC MAP (4) PORT MAP (clk, RESET, '1', rdstNumOutIDEXIn, rdstNumOutIDEXOut);
     decode_stage_reg_lbl_7 : ENTITY work.Reg GENERIC MAP (4) PORT MAP (clk, RESET, '1', rsrcNumOutIDEXIn, rsrcNumOutIDEXOut);
     decode_stage_reg_lbl_8 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', controlSignalsOutIDEXIn, controlSignalsOutIDEXOut);
+    decode_stage_reg_lbl_9 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', spOutIDEXIn, spOutIDEXOut);
     --- exec stage
-    exec_stage_lbl : ENTITY work.execute_stage GENERIC MAP(32, 32) PORT MAP(clk, RESET, rdstOutIDEXOut, rsrcOutIDEXOut, memOut, aluOut, inputportOutIDEXOut, offsetOutIDEXIn, flags, rdstNumOutIDEXOut, rsrcNumOutIDEXOut, RdestNumMEMWB, RdestNumBuffOut, controlOutBuffOut(20), controlOutMEMWB(20), controlSignalsOutIDEXOut, RdestOutEXBuffIn, aluOutEXBuffIn, outPort, RdestNumBuffIn, flagOutBuffIn, controlOutBuffIn);
-    -- exec_stage_lbl : ENTITY work.execute_stage GENERIC MAP(32, 32) PORT MAP(clk, RESET, rdstOut, rsrcOut, memOut, aluOut, inputportOut, offsetOut, flags, rdstNumOut, rsrcNumOut, RdestNumMEMWB, ExOut(67 DOWNTO 64), ExOut(91), loadFlagMEMWB, controlSignals, ExIn(31 DOWNTO 0), ExIn(63 DOWNTO 32), outPort, ExIn(67 DOWNTO 64), ExIn(70 DOWNTO 68), ExIn(102 DOWNTO 71));
-
-    --EX_MEM_Buffer_lbl : ENTITY work.Reg GENERIC MAP (135) PORT MAP (clk, RESET, '1', EXIn, EXOut);
-
+    exec_stage_lbl : ENTITY work.execute_stage GENERIC MAP(32, 32) PORT MAP(clk, RESET, rdstOutIDEXOut, rsrcOutIDEXOut, memOutMEMWBOut, aluOutEXBuffOut, inputportOutIDEXOut, offsetOutIDEXIn, flags, rdstNumOutIDEXOut, rsrcNumOutIDEXOut, rdstNumOutMEMWBOut, RdestNumBuffOut, controlOutBuffOut(20), controlOutMEMWB(20), controlSignalsOutIDEXOut, RdestOutEXBuffIn, aluOutEXBuffIn, outPort, RdestNumBuffIn, flagOutBuffIn, controlOutBuffIn);
     EX_MEM_BUU_SIGNAL_1_lbl :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', RdestOutEXBuffIn, RdestOutEXBuffOut);
     EX_MEM_BUU_SIGNAL_2_lbl :
@@ -106,4 +108,15 @@ BEGIN
     ENTITY work.Reg GENERIC MAP (3) PORT MAP (clk, RESET, '1', flagOutBuffIn, flagOutBuffOut);
     EX_MEM_BUU_SIGNAL_5_lbl :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', controlOutBuffIn, controlOutBuffOut);
+    -- memory 
+    memory_stage_lbl : ENTITY work.memory PORT MAP (controlOutBuffOut(0), controlOutBuffOut(1), controlOutBuffOut(9), RdestOutEXBuffOut, aluOutEXBuffOut, spOutIDEXOut, memOutMEMWBIn);
+
+    MEM_WB_reg_lbl_1 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', memOutMEMWBIn, memOutMEMWBOut);
+    MEM_WB_reg_lbl_2 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', aluOutEXBuffOut, aluOutMEMWBOut);
+    MEM_WB_reg_lbl_3 : ENTITY work.Reg GENERIC MAP (4) PORT MAP (clk, RESET, '1', RdestNumBuffOut, rdstNumOutMEMWBOut);
+    MEM_WB_reg_lbl_4 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', controlOutBuffOut, controlSignalsOutMEMWBOut);
+
+    --write back
+    write_back_lbl : ENTITY work.write_back PORT MAP(rdstNumOutMEMWBOut, aluOutMEMWBOut, memOutMEMWBOut, controlSignalsOutMEMWBOut, RdstNewValue);
+
 END CPU_arch; -- CPU_arch

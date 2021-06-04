@@ -16,6 +16,6 @@ BEGIN
 
 	addressMux : ENTITY work.mux_2_1 PORT MAP (memAddressSelector, ALUout, SP, addressMuxOut);
 
-	dataMemory : ENTITY work.data_memory GENERIC MAP (16, 32, 16) PORT MAP (memRead, memWrite, addressMuxOut(31 DOWNTO 16), Rdest, memOut);
+	dataMemory : ENTITY work.data_memory GENERIC MAP (65000, 32, 16) PORT MAP (memRead, memWrite, addressMuxOut(31 DOWNTO 16), Rdest, memOut);
 
 END ARCHITECTURE;
