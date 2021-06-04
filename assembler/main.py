@@ -34,7 +34,7 @@ def translate(line: str, line_index: int, out_index: int):
         elif (opcode_type == OpcodeType.DOUBLE_OPD):
             # Reg, Reg
             if (reg_or_imm == 0):
-                dst_reg, src_reg = extract_dst_src(words, line_index)
+                src_reg, dst_reg = extract_dst_src(words, line_index)
             # Reg, Imm
             else:
                 dst_reg, imm = extract_dst_imm(words, line_index)
