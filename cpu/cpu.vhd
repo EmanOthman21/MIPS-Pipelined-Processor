@@ -109,12 +109,12 @@ BEGIN
     EX_MEM_BUU_SIGNAL_5_lbl :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', controlOutBuffIn, controlOutBuffOut);
     -- memory 
-    memory_stage_lbl : ENTITY work.memory PORT MAP (controlOutBuffOut(0), controlOutBuffOut(1), controlOutBuffOut(9), RdestOutEXBuffOut, aluOutEXBuffOut, spOutIDEXOut, memOutMEMWBIn);
+    memory_stage_lbl : ENTITY work.memory PORT MAP (controlOutBuffOut(0), controlOutBuffOut(1), controlOutBuffOut(9), RdestOutEXBuffOut, aluOutEXBuffOut, spOutIDEXOut, controlOutBuffOut, RdestNumBuffOut, memOutMEMWBIn, aluOutMEMWBIn, controlSignalsOutMEMWBIn, rdstNumOutMEMWBIn);
 
     MEM_WB_reg_lbl_1 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', memOutMEMWBIn, memOutMEMWBOut);
-    MEM_WB_reg_lbl_2 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', aluOutEXBuffOut, aluOutMEMWBOut);
-    MEM_WB_reg_lbl_3 : ENTITY work.Reg GENERIC MAP (4) PORT MAP (clk, RESET, '1', RdestNumBuffOut, rdstNumOutMEMWBOut);
-    MEM_WB_reg_lbl_4 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', controlOutBuffOut, controlSignalsOutMEMWBOut);
+    MEM_WB_reg_lbl_2 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', aluOutMEMWBIn, aluOutMEMWBOut);
+    MEM_WB_reg_lbl_3 : ENTITY work.Reg GENERIC MAP (4) PORT MAP (clk, RESET, '1', rdstNumOutMEMWBIn, rdstNumOutMEMWBOut);
+    MEM_WB_reg_lbl_4 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', controlSignalsOutMEMWBIn, controlSignalsOutMEMWBOut);
 
     --write back
     write_back_lbl : ENTITY work.write_back PORT MAP(rdstNumOutMEMWBOut, aluOutMEMWBOut, memOutMEMWBOut, controlSignalsOutMEMWBOut, RdstNewValue);
