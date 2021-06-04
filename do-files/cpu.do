@@ -7,10 +7,9 @@ sim:/cpu/outPort \
 sim:/cpu/IRIFIDOut \
 sim:/cpu/PCIFIDOut \
 sim:/cpu/inputportOutIDEXOut \
-sim:/cpu/exec_stage_lbl/aluComp/A \
-sim:/cpu/exec_stage_lbl/aluComp/B \
 sim:/cpu/RdestOutEXBuffIn \
 sim:/cpu/aluOutEXBuffIn \
+sim:/cpu/aluOutEXBuffOut \
 sim:/cpu/RdestNumBuffIn \
 sim:/cpu/flagOutBuffIn \
 sim:/cpu/controlOutBuffIn \
@@ -52,4 +51,4 @@ force -freeze sim:/cpu/inPort 32'd5 0
 force -freeze sim:/cpu/reset 1'b0 0
 run 750
 force -freeze sim:/cpu/inPort 16#10 0
-run 1750
+run 750
