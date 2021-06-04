@@ -9,8 +9,12 @@ sim:/cpu/PCIFIDOut \
 sim:/cpu/inputportOutIDEXOut \
 sim:/cpu/exec_stage_lbl/aluOut \
 sim:/cpu/exec_stage_lbl/memOut \
+sim:/cpu/exec_stage_lbl/Rdest \
+sim:/cpu/exec_stage_lbl/control \
+sim:/cpu/exec_stage_lbl/inSel2 \
 sim:/cpu/exec_stage_lbl/aluComp/A \
 sim:/cpu/exec_stage_lbl/aluComp/B \
+sim:/cpu/exec_stage_lbl/RdestNumID \
 sim:/cpu/RdestOutEXBuffIn \
 sim:/cpu/aluOutEXBuffIn \
 sim:/cpu/RdestNumBuffIn \
