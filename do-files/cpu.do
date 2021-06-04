@@ -8,7 +8,7 @@ sim:/cpu/IRIFIDOut \
 sim:/cpu/PCIFIDOut \
 sim:/cpu/flagOutBuffOut \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R1 \
-sim:/cpu/decode_stage_lbl/register_file_lbl/R2 \
+sim:/cpu/decode_stage_lbl/register_file_lbl/R2
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
