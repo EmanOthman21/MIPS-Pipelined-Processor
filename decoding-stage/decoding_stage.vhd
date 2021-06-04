@@ -43,4 +43,5 @@ BEGIN
 
     controlSignalsOut <= controlSignals;
     pcOut <= pc;
+    inputportOut <= inputPort;
 END decoding_stage_arch; -- decoding_stage_arch

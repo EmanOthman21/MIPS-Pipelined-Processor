@@ -28,6 +28,9 @@ sim:/cpu/fetch_stage_lbl/stall_pc_mux_out \
 sim:/cpu/fetch_stage_lbl/pcIn \
 sim:/cpu/RdstNewValue \
 sim:/cpu/rdstNumOutMEMWBOut \
+sim:/cpu/aluOutMEMWBOut \
+sim:/cpu/memOutMEMWBOut \
+sim:/cpu/inputportOutIDEXOut \
 sim:/cpu/decode_stage_lbl/register_file_lbl/RdstNewValue \
 sim:/cpu/decode_stage_lbl/register_file_lbl/RdstWriteBacknum \
 sim:/cpu/decode_stage_lbl/RdstWriteBackNum \
