@@ -12,13 +12,11 @@ ENTITY execute_stage IS
     Rdest, Rsrc : IN STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
     memOut, aluOut : IN STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
     inPort, offset : IN STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
-    flagRegIn : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
     RdestNumID, RsrcNumID, RdestNumMem, RdestNumEX : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-    wbEX, wbMem : IN std_logic;
+    wbEX, wbMem : IN STD_LOGIC;
     control : IN STD_LOGIC_VECTOR (controlSignalSize - 1 DOWNTO 0);
     RdestOutEX, aluOutEX, outPort : OUT STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
     RdestNum : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
-    flagOut : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
     controlOut : OUT STD_LOGIC_VECTOR (controlSignalSize - 1 DOWNTO 0)
   );
 END execute_stage;
@@ -39,13 +37,13 @@ ARCHITECTURE executeArch OF execute_stage IS
   COMPONENT forwarding IS
     PORT (
       srcNumID, destNumEX, destNumMem : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-      wbEX, wbMem : IN std_logic;
+      wbEX, wbMem : IN STD_LOGIC;
       selector : OUT STD_LOGIC_VECTOR (1 DOWNTO 0));
   END COMPONENT;
 
   COMPONENT flag IS
     PORT (
-      cin, changeEnable, setCarry, clrCarry : IN STD_LOGIC;
+      reset, cin, changeEnable, setCarry, clrCarry : IN STD_LOGIC;
       inFlag : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
       F : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
       outFlag : OUT STD_LOGIC_VECTOR (2 DOWNTO 0));
@@ -58,9 +56,9 @@ ARCHITECTURE executeArch OF execute_stage IS
   SIGNAL aluSelect : STD_LOGIC_VECTOR(3 DOWNTO 0);
   SIGNAL srcIn, forwardedDest, aluIn1, aluIn2, aluTemp : STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
   SIGNAL inSel1, inSel2 : STD_LOGIC_VECTOR(1 DOWNTO 0);
+  SIGNAL flags : STD_LOGIC_VECTOR (2 DOWNTO 0);
 
 BEGIN
-
   writeFlags <= control(3);
   writeOut <= control(10);
   readInputPort <= control(11);
@@ -91,9 +89,9 @@ BEGIN
     ELSE
     forwardedDest;
 
-  aluComp : alu GENERIC MAP(32) PORT MAP(aluIn1, aluIn2, aluSelect, flagRegIn(2), aluTemp, aluCout);
+  aluComp : alu GENERIC MAP(32) PORT MAP(aluIn1, aluIn2, aluSelect, flags(2), aluTemp, aluCout);
 
-  flagComp : flag PORT MAP(aluCout, writeFlags, setCarry, clrCarry, flagRegIn, aluTemp, flagOut);
+  flagComp : flag PORT MAP(RESET, aluCout, writeFlags, setCarry, clrCarry, flags, aluTemp, flags);
 
   aluOutEx <= aluTemp;
   outPort <= forwardedDest WHEN writeOut = '1';
