@@ -48,61 +48,40 @@ BEGIN
   -- map outputs
   F <= (OTHERS => '0') WHEN selector = "0001"
     -- Not
-    ELSE
-    FINV WHEN selector = "0010"
+    ELSE FINV WHEN selector = "0010"
     -- INC
-    ELSE
-    FINC WHEN selector = "0011"
+    ELSE FINC WHEN selector = "0011"
     -- NEG
-    ELSE
-    NEGB WHEN selector = "0100"
+    ELSE NEGB WHEN selector = "0100"
     -- DEC
-    ELSE
-    FDEC WHEN selector = "0101"
+    ELSE FDEC WHEN selector = "0101"
     -- RLC
-    ELSE
-    B(n - 2 DOWNTO 0) & B(n - 1) WHEN selector = "0110"
+    ELSE B(n - 2 DOWNTO 0) & cin WHEN selector = "0110"
     -- RRC
-    ELSE
-    B(0) & B(n - 1 DOWNTO 1) WHEN selector = "0111"
+    ELSE cin & B(n - 1 DOWNTO 1) WHEN selector = "0111"
     -- Move
-    ELSE
-    A WHEN selector = "1000" OR selector = "1111"
+    ELSE A WHEN selector = "1000" OR selector = "1111"
     -- Add
-    ELSE
-    FADD WHEN selector = "1001"
+    ELSE FADD WHEN selector = "1001"
     -- SUB
-    ELSE
-    FSUB WHEN selector = "1010"
+    ELSE FSUB WHEN selector = "1010"
     -- AND
-    ELSE
-    (A AND B) WHEN selector = "1011"
+    ELSE (A AND B) WHEN selector = "1011"
     -- OR
-    ELSE
-    (A OR B) WHEN selector = "1100"
+    ELSE (A OR B) WHEN selector = "1100"
     -- SHL
-    ELSE
-    LEFTB WHEN selector = "1101"
+    ELSE LEFTB WHEN selector = "1101"
     -- SHR
-    ELSE
-    RIGHTB WHEN selector = "1110"
-    ELSE
-    B;
+    ELSE RIGHTB WHEN selector = "1110"
+    ELSE B;
 
   cout <= CINC WHEN selector = "0011"
-    ELSE
-    CNEGB WHEN selector = "0100"
-    ELSE
-    CDEC WHEN selector = "0101"
-    ELSE
-    B(n - 1) WHEN selector = "0110" OR selector = "1101"
-    ELSE
-    B(0) WHEN selector = "0111" OR selector = "1110"
-    ELSE
-    CADD WHEN selector = "1001"
-    ELSE
-    CSUB WHEN selector = "1010"
-    ELSE
-    cin;
+    ELSE CNEGB WHEN selector = "0100"
+    ELSE CDEC WHEN selector = "0101"
+    ELSE B(n - 1) WHEN selector = "0110" OR selector = "1101"
+    ELSE B(0) WHEN selector = "0111" OR selector = "1110"
+    ELSE CADD WHEN selector = "1001"
+    ELSE CSUB WHEN selector = "1010"
+    ELSE cin;
 
 END a_alu;
