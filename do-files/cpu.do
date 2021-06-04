@@ -30,7 +30,8 @@ sim:/cpu/inputportOutIDEXOut \
 sim:/cpu/decode_stage_lbl/register_file_lbl/RdstNewValue \
 sim:/cpu/decode_stage_lbl/register_file_lbl/RdstWriteBacknum \
 sim:/cpu/RdestOutEXBuffOut \
-sim:/cpu/aluOutMEMWBIn
+sim:/cpu/aluOutMEMWBIn \
+sim:/cpu/controlSignalsOutMEMWBOut
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
@@ -44,7 +45,6 @@ run 150
 
 force -freeze sim:/cpu/inPort 32'd5 0
 force -freeze sim:/cpu/reset 1'b0 0
-run 740
+run 750
 force -freeze sim:/cpu/inPort 32'h10 0
-force -freeze sim:/cpu/reset 1'b0 0
 run 1740

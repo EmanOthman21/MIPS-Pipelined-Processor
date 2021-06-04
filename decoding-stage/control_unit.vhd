@@ -242,7 +242,7 @@ BEGIN
         "01" WHEN(opCode = NEG) ELSE
         "01" WHEN(opCode = DEC) ELSE
         "00" WHEN(opCode = OUTControl) ELSE
-        "00" WHEN(opCode = INControl) ELSE
+        "01" WHEN(opCode = INControl) ELSE
         "01" WHEN(opCode = RLC) ELSE
         "01" WHEN(opCode = RRC) ELSE
         "01" WHEN(opCode = MOV) ELSE
