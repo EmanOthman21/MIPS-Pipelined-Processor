@@ -3,12 +3,12 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
 ENTITY fetch IS
-	PORT (
-		clk, reset, loadUse : IN STD_LOGIC;
-		pcIn : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-		pcOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		IR : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-	);
+    PORT (
+        clk, reset, loadUse : IN STD_LOGIC;
+        pcIn : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        pcOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        IR : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+    );
 END fetch;
 
 ARCHITECTURE fetch_stage OF fetch IS
@@ -28,11 +28,11 @@ BEGIN
 
 	mainMemory : ENTITY work.instructions_memory GENERIC MAP (65000, 32, 16) PORT MAP (reset, stall_pc_mux_out, m0, irTemp);
 
-	pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 2, 32)) WHEN (irTemp(29) = '1' AND RESET = '0' AND clk'event AND clk = '1')
-		ELSE
-		STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 1, 32)) WHEN(irTemp(29) = '0' AND RESET = '0' AND clk'event AND clk = '1')
-		ELSE
-		m0 WHEN RESET = '1';
+	pcAdder <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 2, 32)) WHEN (irTemp(29) = '1' AND RESET = '0' AND clk'event AND clk = '0')
+	ELSE
+	STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(stall_pc_mux_out)) + 1, 32)) WHEN(irTemp(29) = '0' AND RESET = '0' AND clk'event AND clk = '0')
+	ELSE
+	m0 WHEN RESET = '1';
 
 	IR <= irTemp;
 
