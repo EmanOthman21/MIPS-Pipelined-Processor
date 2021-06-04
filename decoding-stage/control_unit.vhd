@@ -352,7 +352,7 @@ BEGIN
         "1000" WHEN(opCode = MOV) ELSE
         "1001" WHEN(opCode = ADD) ELSE
         "1010" WHEN(opCode = SUB) ELSE
-        "0111" WHEN(opCode = ANDControl) ELSE
+        "1011" WHEN(opCode = ANDControl) ELSE
         "1100" WHEN(opCode = ORControl) ELSE
         "1001" WHEN(opCode = IADD) ELSE
         "1101" WHEN(opCode = SHL) ELSE
