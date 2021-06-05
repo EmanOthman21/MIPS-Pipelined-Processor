@@ -128,7 +128,7 @@ BEGIN
         '0' WHEN(opCode = POP) ELSE
         '0' WHEN(opCode = LDD) ELSE
         '1' WHEN(opCode = STD);
-    pcSelector <= '0' WHEN(RESET = '1') ELSE
+    pcSelector <= '1' WHEN(RESET = '1') ELSE
         '0' WHEN(opCode = NOP) ELSE
         '0' WHEN(opCode = SETC) ELSE
         '0' WHEN(opCode = CLRC) ELSE
@@ -257,7 +257,7 @@ BEGIN
         "00" WHEN(opCode = PUSH) ELSE
         "10" WHEN(opCode = POP) ELSE
         "10" WHEN(opCode = LDD) ELSE
-        "10" WHEN(opCode = STD);
+        "00" WHEN(opCode = STD);
     memAddressSelector <= '0' WHEN(RESET = '1') ELSE
         '0' WHEN(opCode = NOP) ELSE
         '0' WHEN(opCode = SETC) ELSE
@@ -444,7 +444,7 @@ BEGIN
         '0' WHEN(opCode = NOP) ELSE
         '0' WHEN(opCode = SETC) ELSE
         '0' WHEN(opCode = CLRC) ELSE
-        '0' WHEN(opCode = CLR) ELSE
+        '1' WHEN(opCode = CLR) ELSE
         '1' WHEN(opCode = NOTControl) ELSE
         '1' WHEN(opCode = INC) ELSE
         '1' WHEN(opCode = NEG) ELSE
