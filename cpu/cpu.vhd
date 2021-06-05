@@ -97,7 +97,7 @@ BEGIN
     decode_stage_reg_lbl_9 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', spOutIDEXIn, spOutIDEXOut);
     --- exec stage
 
-    exec_stage_lbl : ENTITY work.execute_stage GENERIC MAP(32, 32) PORT MAP(clk, RESET, rdstOutIDEXOut, rsrcOutIDEXOut, RdstNewValue, aluOutEXBuffOut, inputportOutIDEXOut, offsetOutIDEXIn, rdstNumOutIDEXOut, rsrcNumOutIDEXOut, rdstNumOutMEMWBOut, RdestNumBuffOut, controlOutBuffOut(20), controlSignalsOutMEMWBOut(20), controlSignalsOutIDEXOut,flagOutBuffOut,flagOutBuffIn, RdestOutEXBuffIn, aluOutEXBuffIn, outPort, RdestNumBuffIn, controlOutBuffIn);
+    exec_stage_lbl : ENTITY work.execute_stage GENERIC MAP(32, 32) PORT MAP(clk, RESET, rdstOutIDEXOut, rsrcOutIDEXOut, RdstNewValue, aluOutEXBuffOut, inputportOutIDEXOut, offsetOutIDEXOut, rdstNumOutIDEXOut, rsrcNumOutIDEXOut, rdstNumOutMEMWBOut, RdestNumBuffOut, controlOutBuffOut(20), controlSignalsOutMEMWBOut(20), controlSignalsOutIDEXOut,flagOutBuffOut,flagOutBuffIn, RdestOutEXBuffIn, aluOutEXBuffIn, outPort, RdestNumBuffIn, controlOutBuffIn);
     EX_MEM_BUU_SIGNAL_1_lbl :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', RdestOutEXBuffIn, RdestOutEXBuffOut);
     EX_MEM_BUU_SIGNAL_2_lbl :

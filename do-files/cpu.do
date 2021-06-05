@@ -50,7 +50,6 @@ force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 mem load -i D:/CMP3/2nd/Arch/2-op.mem -format binary /cpu/fetch_stage_lbl/mainMemory/rom
 mem load -i D:/CMP3/2nd/Arch/2-op.mem -format binary /cpu/memory_stage_lbl/dataMemory/ram
 property wave -radix hexa *
-property wave -radix bin sim:/cpu/flagOutBuffOut
 
 force -freeze sim:/cpu/reset 1'b1 0
 run 150
