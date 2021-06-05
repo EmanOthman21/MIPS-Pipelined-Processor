@@ -150,10 +150,10 @@ BEGIN
         '0' WHEN(opCode = SHL) ELSE
         '0' WHEN(opCode = SHR) ELSE
         '0' WHEN(opCode = LDM) ELSE
-        '0' WHEN(opCode = PUSH) ELSE
+        '1' WHEN(opCode = PUSH) ELSE
         '0' WHEN(opCode = POP) ELSE
         '0' WHEN(opCode = LDD) ELSE
-        '0' WHEN(opCode = STD);
+        '1' WHEN(opCode = STD);
     flagWrite <= '0' WHEN(RESET = '1') ELSE
         '0' WHEN(opCode = NOP) ELSE
         '1' WHEN(opCode = SETC) ELSE
@@ -454,7 +454,7 @@ BEGIN
         '1' WHEN(opCode = RLC) ELSE
         '1' WHEN(opCode = RRC) ELSE
         '1' WHEN(opCode = MOV) ELSE
-        '1' WHEN(opCode = ADD) ELSE
+        '1' WHEN(opCode = ADD)OUT ELSE
         '1' WHEN(opCode = SUB) ELSE
         '1' WHEN(opCode = ANDControl) ELSE
         '1' WHEN(opCode = ORControl) ELSE
