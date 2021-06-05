@@ -5,16 +5,17 @@ ENTITY register_file IS
     PORT (
         clk, RESET : IN STD_LOGIC;
         IR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+
         RdstNewValue : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstWriteBacknum : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         spOperationSelector : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-        rdstWB: in std_logic;
+        rdstWB : IN STD_LOGIC;
         offset : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         Rdst : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         Rsrc : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         RdstNum : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-        RsrcNum : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-        spOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        RsrcNum : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+
     );
 END register_file;
 
@@ -41,17 +42,14 @@ BEGIN
     -- rsrc mux
     rsrc_mux_lbl : ENTITY work.mux_4x16 PORT MAP (clk, IR(19 DOWNTO 16), R0, R1, R2, R3, r4, R5, R6, R7, pc, sp, tempRsrc);
 
-    -- sp control unit 
-    sp_control_unit_lbl : ENTITY work.sp_control_unit PORT MAP(clk, spOperationSelector, sp);
-
     -- write back to rdst 
-    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RESET, rdstWB,RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc, sp);
+    rdst_wb_lbl : ENTITY work.demux_4x16 PORT MAP (clk, RESET, rdstWB, RdstWriteBacknum, RdstNewValue, R0, R1, R2, R3, R4, R5, R6, R7, pc);
 
     offset <= STD_LOGIC_VECTOR(resize(unsigned(IR(15 DOWNTO 0)), 32));
 
     RdstNum <= IR(23 DOWNTO 20);
     RsrcNum <= IR(19 DOWNTO 16);
     Rdst <= tempRdst;
-    spOut <= sp;
     Rsrc <= tempRsrc;
+
 END register_file_architecture;

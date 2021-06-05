@@ -463,7 +463,7 @@ BEGIN
         '1' WHEN(opCode = SHR) ELSE
         '1' WHEN(opCode = LDM) ELSE
         '0' WHEN(opCode = PUSH) ELSE
-        '0' WHEN(opCode = POP) ELSE
+        '1' WHEN(opCode = POP) ELSE
         '1' WHEN(opCode = LDD) ELSE
         '0' WHEN(opCode = STD);
 END controle_unit_default; -- controle_unit_default
