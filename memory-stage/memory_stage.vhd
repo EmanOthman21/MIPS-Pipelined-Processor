@@ -20,7 +20,7 @@ BEGIN
 
 	addressMux : ENTITY work.mux_2_1 PORT MAP (memAddressSelector, ALUout, spIn, addressMuxOut);
 
-	dataMemory : ENTITY work.data_memory GENERIC MAP (65537, 32, 16) PORT MAP (clk, RESET, memRead, memWrite, addressMuxOut(15 DOWNTO 0), Rdest, controlSignalsIn(5 DOWNTO 4), memOut);
+	dataMemory : ENTITY work.data_memory GENERIC MAP (65536, 32, 16) PORT MAP (clk, RESET, memRead, memWrite, addressMuxOut(15 DOWNTO 0), Rdest, controlSignalsIn(5 DOWNTO 4), memOut);
 	-- sp control unit 
 	sp_control_unit_lbl : ENTITY work.sp_control_unit PORT MAP(clk, RESET, controlSignalsIn(5 DOWNTO 4), spIn, sp);
 
