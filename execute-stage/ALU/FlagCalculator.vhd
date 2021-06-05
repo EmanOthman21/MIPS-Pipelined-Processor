@@ -18,8 +18,8 @@ ARCHITECTURE flag_arch OF flag IS
   else inFlag(2);
 
   outFlag(1) <= '0' when reset='1'
-  else F(31) when (changeEnable = '1' and (F(31) = '0' or F(31)='1'))
-  else inFlag(1);
+  else inFlag(1) when (aluSelect="0000" or aluSelect="1000" or changeEnable ='0')
+  else F(31);
 
   outFlag(0) <= '0' when reset = '1'
   else inFlag(0) when (aluSelect="0000" or aluSelect="1000" or changeEnable ='0')

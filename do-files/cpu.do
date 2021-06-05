@@ -53,8 +53,8 @@ sim:/cpu/RdstNewValue
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
-mem load -i D:/CMP3/2nd/Arch/mem.mem -format binary /cpu/fetch_stage_lbl/mainMemory/rom
-mem load -i D:/CMP3/2nd/Arch/mem.mem -format binary /cpu/memory_stage_lbl/dataMemory/ram
+mem load -i D:/CMP3/2nd/Arch/memory.mem -format binary /cpu/fetch_stage_lbl/mainMemory/rom
+mem load -i D:/CMP3/2nd/Arch/memory.mem -format binary /cpu/memory_stage_lbl/dataMemory/ram
 property wave -radix hexa *
 
 force -freeze sim:/cpu/reset 1'b1 0
