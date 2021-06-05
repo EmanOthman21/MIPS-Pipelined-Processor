@@ -444,7 +444,7 @@ BEGIN
         '0' WHEN(opCode = NOP) ELSE
         '0' WHEN(opCode = SETC) ELSE
         '0' WHEN(opCode = CLRC) ELSE
-        '0' WHEN(opCode = CLR) ELSE
+        '1' WHEN(opCode = CLR) ELSE
         '1' WHEN(opCode = NOTControl) ELSE
         '1' WHEN(opCode = INC) ELSE
         '1' WHEN(opCode = NEG) ELSE

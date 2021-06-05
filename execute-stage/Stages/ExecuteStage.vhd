@@ -48,6 +48,7 @@ ARCHITECTURE executeArch OF execute_stage IS
       clk,reset, cin, changeEnable, setCarry, clrCarry : IN STD_LOGIC;
       inFlag : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
       F : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+      aluSelect: IN std_logic_vector(3 downto 0);
       outFlag : OUT STD_LOGIC_VECTOR (2 DOWNTO 0));
   END COMPONENT;
   ---------------------
@@ -92,7 +93,7 @@ BEGIN
 
   aluComp : alu GENERIC MAP(32) PORT MAP(aluIn1, aluIn2, aluSelect, flagIn(2), aluTemp, aluCout);
 
-  flagComp : flag PORT MAP(clk,RESET, aluCout, writeFlags, setCarry, clrCarry, flagIn, aluTemp, flagOut);
+  flagComp : flag PORT MAP(clk,RESET, aluCout, writeFlags, setCarry, clrCarry, flagIn, aluTemp,aluSelect, flagOut);
 
   aluOutEx <= aluTemp;
   outPort <= forwardedDest WHEN writeOut = '1';

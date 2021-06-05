@@ -6,6 +6,7 @@ sim:/cpu/inPort \
 sim:/cpu/outPort \
 sim:/cpu/IRIFIDOut \
 sim:/cpu/PCIFIDOut \
+sim:/cpu/aluOutEXBuffOut \
 sim:/cpu/flagOutBuffOut \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R1 \
 sim:/cpu/decode_stage_lbl/register_file_lbl/R2
