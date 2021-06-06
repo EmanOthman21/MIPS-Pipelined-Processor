@@ -1,1 +1,14 @@
 **/__pycache__
+work/*
+*.cr.mti
+*.mpf
+*.wlf
+transcript
+_info
+*.cr.mti
+*.mpf
+work
+*stacktrace.txt
+*.wlf
+*.vstf
+.vscode/*

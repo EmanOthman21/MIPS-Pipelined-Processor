@@ -1,0 +1,63 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compile the current vhdl file",
+            "type": "shell",
+            "command": "vcom -work work ./${relativeFileDirname}/${fileBasename}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [
+                            "/d", "/c"
+                        ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            }
+        },
+        {
+            "label": "Simulate Current File",
+            "type": "shell",
+            "command": "vsim -gui -default_radix 10 work.${fileBasenameNoExtension}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [
+                            "/d", "/c"
+                        ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            }
+        }
+    ]
+}
