@@ -72,7 +72,7 @@ ARCHITECTURE controle_unit_default OF control_unit IS
     SIGNAL opCode : INTEGER;
 
 BEGIN
-    load_use_detection_lbl : ENTITY work.laod_use_detection PORT MAP (IR, loadFlagEXMEM, loadFlagMEMWB, RdestNumEXMEM, RdestNumMEMWB, loadUse);
+    load_use_detection_lbl : ENTITY work.laod_use_detection PORT MAP (IR, loadFlagEXMEM, RdestNumEXMEM, loadUse);
 
     immFlag <= IR(29);
     opCode <= to_integer(unsigned(IR(31 DOWNTO 24)));

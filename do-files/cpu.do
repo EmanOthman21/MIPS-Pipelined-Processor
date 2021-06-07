@@ -49,12 +49,17 @@ sim:/cpu/memory_stage_lbl/addressMuxOut \
 sim:/cpu/memory_stage_lbl/Rdest \
 sim:/cpu/memory_stage_lbl/controlSignalsIn \
 sim:/cpu/memory_stage_lbl/memOut \
+sim:/cpu/decode_stage_lbl/control_unit_lbl/load_use_detection_lbl/RdestNumEXMEM \
+sim:/cpu/decode_stage_lbl/control_unit_lbl/load_use_detection_lbl/loadFlagEXMEM \
+sim:/cpu/decode_stage_lbl/control_unit_lbl/load_use_detection_lbl/loadUse \
+sim:/cpu/decode_stage_lbl/control_unit_lbl/load_use_detection_lbl/Rsrc \
+sim:/cpu/decode_stage_lbl/control_unit_lbl/load_use_detection_lbl/Rdest \
 sim:/cpu/RdstNewValue 
 
 force -freeze sim:/cpu/clk 1 0, 0 {50 ps} -r 100
 
-mem load -i D:/CMP3/2nd/Arch/memory.mem -format binary /cpu/fetch_stage_lbl/mainMemory/rom
-mem load -i D:/CMP3/2nd/Arch/memory.mem -format binary /cpu/memory_stage_lbl/dataMemory/ram
+mem load -i D:/CMP3/2nd/Arch/loaduse.mem -format binary /cpu/fetch_stage_lbl/mainMemory/rom
+mem load -i D:/CMP3/2nd/Arch/loaduse.mem -format binary /cpu/memory_stage_lbl/dataMemory/ram
 property wave -radix hexa *
 
 force -freeze sim:/cpu/reset 1'b1 0
