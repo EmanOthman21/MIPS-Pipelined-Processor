@@ -78,13 +78,14 @@ ARCHITECTURE CPU_arch OF CPU IS
 BEGIN
     --- fetch 
     fetch_stage_lbl :
-    ENTITY work.fetch PORT MAP(clk, RESET, controlSignalsOutIDEXIn(21), PCIFIDOut, PCIFIDIn, IRIFIDIn);
+    ENTITY work.fetch PORT MAP(clk, RESET, controlSignalsOutIDEXIn(21), IRIFIDOut, PCIFIDOut, PCIFIDIn, IRIFIDIn);
 
     fetch_stage_registerr_lbl_1 :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, '0', '1', PCIFIDIn, PCIFIDOut);
+
     fetch_stage_registerr_lbl_2 :
     ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', IRIFIDIn, IRIFIDOut);
-    -- decode 
+    -- decode
     decode_stage_lbl : ENTITY work.decoding_stage GENERIC MAP (32) PORT MAP(clk, PCIFIDOut, IRIFIDOut, RdstNewValue, rdstNumOutMEMWBOut, inPort, flags, RESET, controlSignalsOutMEMWBOut(20), controlOutBuffIn(19), controlSignalsOutMEMWBOut(19), RdestNumBuffIn, rdstNumOutMEMWBOut, controlSignalsOutMEMWBOut(5 DOWNTO 4), PCIDEXIn, rdstOutIDEXIn, rsrcOutIDEXIn, offsetOutIDEXIn, inputportOutIDEXIn, rdstNumOutIDEXIn, rsrcNumOutIDEXIn, controlSignalsOutIDEXIn);
 
     decode_stage_reg_lbl_1 : ENTITY work.Reg GENERIC MAP (32) PORT MAP (clk, RESET, '1', PCIDEXIn, PCIDEXOut);

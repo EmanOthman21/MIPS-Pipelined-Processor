@@ -63,11 +63,11 @@ mem load -i D:/CMP3/2nd/Arch/loaduse.mem -format binary /cpu/memory_stage_lbl/da
 property wave -radix hexa *
 
 force -freeze sim:/cpu/reset 1'b1 0
-run 150
+run 100
 
 
 force -freeze sim:/cpu/reset 1'b0 0
-run 150
+run 100
 force -freeze sim:/cpu/inPort 16#19 0
 run 100
 force -freeze sim:/cpu/inPort 16#ffff 0
