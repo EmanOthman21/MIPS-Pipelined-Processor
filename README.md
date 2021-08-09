@@ -37,12 +37,12 @@ you can check the design here<a href="Design.pdf"> Design</a>
 </tr>
 
 <tr>
-<td>31-30 <br> (2 bits)</td>
-<td>29 <br> (1 bit)</td>
-<td> 28-24 <br> (5 bits) </td>
-<td>23-20 <br> (4 bits)</td>
-<td> 19-16 <br> (4 bits) </td>
-<td> 15-0 <br> (16 bits) </td>
+<td style="text-align:center">31-30 <br> (2 bits)</td>
+<td style="text-align:center">29 <br> (1 bit)</td>
+<td style="text-align:center"> 28-24 <br> (5 bits) </td>
+<td style="text-align:center">23-20 <br> (4 bits)</td>
+<td style="text-align:center"> 19-16 <br> (4 bits) </td>
+<td style="text-align:center"> 15-0 <br> (16 bits) </td>
 </tr>
 </table>
 
@@ -53,17 +53,17 @@ you can check the design here<a href="Design.pdf"> Design</a>
 <br>
 <table border="1" style="text-align:center">
 <tr>
-<td>0-operand or 1-operand </td>
-<td>2-operands</td>
-<td>Memory</td>
-<td>Change of control</td>
+<td style="text-align:center">0-operand or 1-operand </td>
+<td style="text-align:center">2-operands</td>
+<td style="text-align:center">Memory</td>
+<td style="text-align:center">Change of control</td>
 </tr>
 
 <tr>
-<td>00</td>
-<td>01</td>
-<td>10</td>
-<td>11</td>
+<td style="text-align:center">00</td>
+<td style="text-align:center">01</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">11</td>
 </tr>
 </table>
 
@@ -82,66 +82,66 @@ you can check the design here<a href="Design.pdf"> Design</a>
 </tr>
 
 <tr>
-<td>NOP</td>
-<td>CLR</td>
-<td>MOV</td>
-<td>PUSH</td>
+<td style="text-align:center">NOP</td>
+<td style="text-align:center">CLR</td>
+<td style="text-align:center">MOV</td>
+<td style="text-align:center">PUSH</td>
 </tr>
 
 <tr>
-<td>SETC</td>
-<td>NOT</td>
-<td>ADD</td>
-<td>POP</td>
+<td style="text-align:center">SETC</td>
+<td style="text-align:center">NOT</td>
+<td style="text-align:center">ADD</td>
+<td style="text-align:center">POP</td>
 </tr>
 
 <tr>
-<td>CLRC</td>
-<td>INC</td>
-<td>SUB</td>
-<td>LDD</td>
+<td style="text-align:center">CLRC</td>
+<td style="text-align:center">INC</td>
+<td style="text-align:center">SUB</td>
+<td style="text-align:center">LDD</td>
 </tr>
 
 <tr>
-<td></td>
-<td>NEG</td>
-<td>AND</td>
-<td>STD</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">NEG</td>
+<td style="text-align:center">AND</td>
+<td style="text-align:center">STD</td>
 </tr>
 
 <tr>
-<td></td>
-<td>DEC</td>
-<td>OR</td>
-<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">DEC</td>
+<td style="text-align:center">OR</td>
+<td style="text-align:center"></td>
 </tr>
 
 <tr>
-<td></td>
-<td>OUT</td>
-<td>IADD</td>
-<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">OUT</td>
+<td style="text-align:center">IADD</td>
+<td style="text-align:center"></td>
 </tr>
 
 <tr>
-<td></td>
-<td>IN</td>
-<td>SHL</td>
-<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">IN</td>
+<td style="text-align:center">SHL</td>
+<td style="text-align:center"></td>
 </tr>
 
 <tr>
-<td></td>
-<td>RLC</td>
-<td>SHR</td>
-<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">RLC</td>
+<td style="text-align:center">SHR</td>
+<td style="text-align:center"></td>
 </tr>
 
 <tr>
-<td></td>
-<td>RRC</td>
-<td>LDM</td>
-<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">RRC</td>
+<td style="text-align:center">LDM</td>
+<td style="text-align:center"></td>
 </tr>
 
 </table>
