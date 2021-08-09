@@ -21,11 +21,9 @@ you can check the design here<a href="Design.pdf"> Design</a>
 ### Architure supports R1-R7 with PC, SP
 
 <br>
-<br>
 
 ## IR format
 
-<br>
 <table border="1" style="text-align:center">
 <tr>
 <th  style="text-align:center">Instruction Type</th>
@@ -46,11 +44,10 @@ you can check the design here<a href="Design.pdf"> Design</a>
 </tr>
 </table>
 
-<br><br>
+<br>
 
 ## General components of an instruction opcode
 
-<br>
 <table border="1" style="text-align:center">
 <tr>
 <td style="text-align:center">0-operand or 1-operand </td>
@@ -67,11 +64,9 @@ you can check the design here<a href="Design.pdf"> Design</a>
 </tr>
 </table>
 
-<br><br>
+<br>
 
 ## Supported instructions
-
-<br>
 
 <table border="1" style="text-align:center;width:100%">
 <tr style="text-align:center">
