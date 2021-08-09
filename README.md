@@ -1,4 +1,4 @@
-# Mips 5 Stage Pipelined Processor
+# MIPS 5 Stage Pipelined Processor
 
 ## Design
 
