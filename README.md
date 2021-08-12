@@ -1,5 +1,8 @@
 # MIPS 5 Stage Pipelined Processor
 
+#### This is a MIPS 5 stage 32-bit pipelined processor with Harvard architecture, which comes with an assembler to interpret instructions to supported OP codes.
+
+####
 ## Design
 
 <img src="arch_img.png" center>
@@ -8,27 +11,32 @@ you can check the design here<a href="Design.pdf"> Design</a>
 <br>
 <br>
 
-## Description
-
-### This is a MIPS 5 stage pipelined processor, which comes with an assembler to interpret instructions to supported OP codes.
-
-### This architecture deals with Data hazards and Control Hazards
-
-### We use Full Data Forwarding
-
-### We handled the Load Use Case
-
-### Architure supports R1-R7 with PC, SP
-
+## Features
+- Supports 8 registers from R1 to R7
+- Supports Reset signal
+- Reading and writing to ports
+- Data hazard detection & handling using:
+	- ALU-forwarding
+	- Memory-forwarding
+  - Stalling for load-use case
+- Control hazard detection & handling
 <br>
+<br>
+
+## Stages
+- Fetch
+- Decode
+- Execute
+- Memory
+- Write Back
 
 ## IR format
 
 <table border="1" style="text-align:center">
 <tr>
 <th  style="text-align:center">Instruction Type</th>
-<th  style="text-align:center">mmediate or register</th>
-<th  style="text-align:center">code</th>
+<th  style="text-align:center">Immediate or register</th>
+<th  style="text-align:center">Code</th>
 <th  style="text-align:center">Rdest</th>
 <th  style="text-align:center">Rsrc</th>
 <th  style="text-align:center">Offset / Immediate value</th>
@@ -140,3 +148,43 @@ you can check the design here<a href="Design.pdf"> Design</a>
 </tr>
 
 </table>
+
+## Run
+
+* Write your program then run the assembler to convert it to binary file
+  ```
+  python main.py <input_file_path> <output_file_path>
+  ```
+
+* Create your project in modelsim with a work library name.
+* Add all the .vhd files in [src](src) to the project.
+
+* Compile all files.
+* Then start simulation with cpu-arch
+* Make sure to change the directory of memory files in the do files before use them.
+
+## Contributors
+<table>
+  <tr>
+    <td align="center">
+    <a href="https://github.com/bahaaEldeen1999" target="_black">
+    <b>Bahaa Eldeen</b></a>
+    </td>
+    <td align="center">
+    <a href="https://github.com/EmanOthman21" target="_black">
+    <b>Eman Othman</b></a>
+    </td>
+    <td align="center">
+    <a href="https://github.com/tarek99samy" target="_black">
+    <b>Tarek Samy</b></a>
+    </td>
+    <td align="center">
+    <a href="https://github.com/devyetii" target="_black">
+    <b>Ebrahim Gomaa</b></a>
+    </td>
+  </tr>
+ </table>
+
+## License
+
+This software is licensed under MIT License, See [MIT licensed](LICENSE)
