@@ -6,9 +6,7 @@
 ## Design
 
 <img src="arch_img.png" center>
-you can check the design here<a href="Design.pdf"> Design</a>
-
-<br>
+You can check the design <a href="Design.pdf"> here</a>
 <br>
 
 ## Features
@@ -20,8 +18,6 @@ you can check the design here<a href="Design.pdf"> Design</a>
 	- Memory-forwarding
   - Stalling for load-use case
 - Control hazard detection & handling
-<br>
-<br>
 
 ## Stages
 - Fetch
@@ -52,7 +48,6 @@ you can check the design here<a href="Design.pdf"> Design</a>
 </tr>
 </table>
 
-<br>
 
 ## General components of an instruction opcode
 
@@ -72,13 +67,11 @@ you can check the design here<a href="Design.pdf"> Design</a>
 </tr>
 </table>
 
-<br>
-
 ## Supported instructions
 
 <table border="1" style="text-align:center;width:100%">
 <tr style="text-align:center">
-<th  style="text-align:center">NO OP</th>
+<th  style="text-align:center">No OP</th>
 <th  style="text-align:center">One OP</th>
 <th  style="text-align:center">Two OP</th>
 <th  style="text-align:center">Memory</th>
@@ -163,6 +156,7 @@ you can check the design here<a href="Design.pdf"> Design</a>
 * Then start simulation with cpu-arch
 * Make sure to change the directory of memory files in the do files before use them.
 
+
 ## Contributors
 <table>
   <tr>
@@ -187,4 +181,4 @@ you can check the design here<a href="Design.pdf"> Design</a>
 
 ## License
 
-This software is licensed under MIT License, See [MIT licensed](LICENSE)
+This software is licensed under MIT License, See [license](LICENSE)
